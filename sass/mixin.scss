@@ -1,8 +1,0 @@
-//Border style (example)
-@mixin borderStyle($bColor) {
-    border: 1px solid $bColor;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    -ms-border-radius: 3px;
-    border-radius: 3px;
-}
