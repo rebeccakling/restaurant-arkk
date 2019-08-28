@@ -1,5 +1,30 @@
 @import "../../sass/style.scss";
 
-.button-main {
-    @include buttonStyle($primaryColor, $fontSubColor);
+
+@media only screen and (min-width: $sm) {
+    .container {
+        max-width: 450px;
+    }
+
+    .button-main {
+        @include buttonStyle($primaryColor, $fontSubColor);
+    }
+}
+
+@media only screen and (min-width: $md) {
+    .container {
+        max-width: 650px;
+    }
+}
+
+@media only screen and (min-width: $lg) {
+    .container {
+        max-width: 900px;
+    }
+}
+
+@media only screen and (min-width: $xl) {
+    .container {
+        max-width: 1000px;
+    }
 }
