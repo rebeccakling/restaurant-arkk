@@ -1,0 +1,5 @@
+@import "../../sass/style.scss";
+
+.button-main {
+    @include buttonStyle($primaryColor, $fontSubColor);
+}

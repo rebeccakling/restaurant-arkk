@@ -1,5 +1,6 @@
-$fontHeadingTitle: 'Hepta Slab';
-$fontBody: 'sans-serif';
+$fontHeadingTitle: "Hepta Slab";
+$fontBody: "sans-serif";
+$fontBodySize: 17px;
 $backgroundColor: #fff;
 $primaryColor: #c59d40;
 $primaryColorSub: #333;
@@ -7,4 +8,12 @@ $fontColorMain: #333;
 $fontSubColor: #fff;
 $hoverColor: #c59d40;
 $fontHeadingTitleColor: #c59d40;
+$mainSpacing: 0.3rem;
+$buttonBookting: #0FAADC;
+$buttonBookingHover: lighten($buttonBookting,40);
+$buttonBookingDisable: #C4C4C4;
+
+
+
+
 

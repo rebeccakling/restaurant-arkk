@@ -306,3 +306,30 @@ template {
     display: none;
 }
 /* === OWN CODE=== */
+
+body {
+    background-color: $backgroundColor;
+    font-family: $fontBody;
+    font-size: $fontBodySize;
+    color: $primaryColor;
+  }
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+  ul {
+    list-style-type: none;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a:link,
+  a:visited,
+  a:hover,
+  a > :active {
+    color: inherit;
+    text-decoration: none;
+  }  
+
+ 

@@ -6,3 +6,16 @@
     -ms-border-radius: 3px;
     border-radius: 3px;
 }
+
+@mixin buttonStyle ($bgColor, $fColor) {
+    padding: 0.5rem 1rem;
+    background: $bgColor;
+    color: $fColor;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: $mainSpacing;
+    border-radius: 2px;
+    border: 1px solid $bgColor;
+    cursor: pointer;
+    margin: $mainSpacing;
+  }
