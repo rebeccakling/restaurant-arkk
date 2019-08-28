@@ -1,6 +1,16 @@
-import React from 'react';
-import './App.scss';
+
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import Data from './service/data';
+
+import "./App.scss";
+import Navbar from "./components/navbar/navbar";
+import Home from "./components/home/home";
+
+import Admin from "./components/admin/admin";
+import About from "./components/about/about";
+import Booking from "./components/booking/booking";
+
 
 let create_booking = {
   "number_of_guests": 6,
@@ -44,10 +54,16 @@ class App extends React.Component<{}, {}> {
     //data.deleteData(delete_booking);
 
     return (
-      <div>
-        {/* <button onClick={d}>click</button> */}
-      </div>
-    );
+    <>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/admin" component={Admin} />
+        <Route exact path="/booking" component={Booking} />
+        <Route component={Home} />
+      </Switch>
+    </>
+  );
   }
 }
 
