@@ -10,7 +10,9 @@ export default class Navbar extends Component {
             <li>
               <a href="/">HOME</a>
             </li>
-            <li className="pointer">BOKA BORD</li>
+            <li>
+              <a href="/booking">BOKA BORD</a>
+            </li>
             <li>
               <a href="/about">OM OSS</a>
             </li>
