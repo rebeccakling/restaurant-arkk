@@ -1,0 +1,50 @@
+.footer {
+    background-color: black;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100% 100% 100%;
+    justify-items: center;
+
+
+}
+
+.box1 {
+    text-align: center;
+    margin: 20px 0;
+
+    p {
+        color: #fff;
+        text-align: center;
+    }
+    
+}
+
+.box2 {
+    margin: 20px 0;
+    text-align: center;
+
+    p {
+        color: #fff;
+        text-align: center;
+    }
+}
+
+.box3 {
+    margin: 20px 0;
+    text-align: center;
+
+    p {
+        color: #fff;
+        text-align: center;
+    }
+}
+
+.box4{
+    margin: 20px 0;
+    text-align: center;
+
+    p {
+        color: #fff;
+        text-align: center;
+    }
+}
