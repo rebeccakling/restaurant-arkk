@@ -11,11 +11,11 @@ import About from "./components/about/about";
 function App() {
   return (
     <>
-      <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/admin" component={Admin} />
+        <Route component={Home} />
       </Switch>
     </>
   );
