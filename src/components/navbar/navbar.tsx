@@ -3,29 +3,29 @@ import { FaBars } from "react-icons/fa";
 import "./navbar.scss";
 
 interface IState {
-  menuBarOpen: boolean;
+  isOpen: boolean;
 }
 class Navbar extends Component<{}, IState> {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      menuBarOpen: true
+      isOpen: true
     };
   }
 
   toggleNavbar = () => {
-    this.setState({ menuBarOpen: !this.state.menuBarOpen });
+    this.setState({ isOpen: !this.state.isOpen });
   };
 
   closeNavbar = () => {
-    if (this.state.menuBarOpen === true) {
+    if (this.state.isOpen === true) {
       this.toggleNavbar();
     }
   };
 
   render() {
-    const display = this.state.menuBarOpen;
+    const display = this.state.isOpen;
     const navbarDisplay = display ? `hide` : `show`;
 
     return (
