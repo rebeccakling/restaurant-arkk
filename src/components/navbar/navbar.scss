@@ -11,7 +11,7 @@ nav {
     background: $primaryColorSub;
     text-align: center;
     width: $containerWidth;
-    width: $maxWidth;
+    max-width: $maxWidth;
     margin: auto;
 
     .react-icon {
@@ -79,14 +79,13 @@ nav {
             height: auto;
         }
 
-    }
+        ul {
+            display: grid;
+            // 1fr 1fr 1fr 1fr
+            grid-template-columns: repeat(4, 1fr);
+        }
 
-    ul {
-        display: grid;
-        // 1fr 1fr 1fr 1fr
-        grid-template-columns: repeat(4, 1fr);
     }
-
 
 }
 
