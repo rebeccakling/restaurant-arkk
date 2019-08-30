@@ -155,8 +155,9 @@
     .footer {
        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
        grid-column: 2 / 6;
-    }
-    .box1 {
-        grid-column: 2 / 3;
+       
+       .box1 {
+           grid-column: 2 / 3;
+       }
     }
 }
