@@ -8,12 +8,12 @@ export default class Home extends Component {
     return (
       <>
       <div className="home-container">
-        <Navbar />
         <div className="hero-container">
           <h1>ARKK</h1>
           <h4>En unik smakupplevelse</h4>
           <button className="button-main">Meny</button>
         </div>
+        <Navbar />
         <div className="intro-container">
           <p>
           Svenska smaker fångade här och nu.<br></br>
