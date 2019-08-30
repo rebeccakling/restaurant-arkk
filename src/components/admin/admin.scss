@@ -1,0 +1,58 @@
+@import "../../sass/style";
+
+.admin {
+
+    .container {
+        overflow-x: auto;
+        align-content: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: "title-container title-container title-container""booking-list-container booking-list-container booking-list-container"". link-container .";
+    }
+
+    .title-container {
+        grid-area: title-container;
+    }
+
+    .booking-list-container {
+        grid-area: booking-list-container;
+    }
+
+    .link-container {
+        grid-area: link-container;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    div {
+        border: 1px dotted pink;
+    }
+
+    table {
+        // margin: auto;
+        border: 1px solid $subColor;
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+
+        th,
+        td {
+            border: 1px solid $subColor;
+        }
+
+        th {
+            background: $primaryColorSub;
+            color: $fontSubColor;
+            text-transform: uppercase;
+        }
+    }
+
+    Link {
+        margin: 0 auto;
+    }
+
+}
