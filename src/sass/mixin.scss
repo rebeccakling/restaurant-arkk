@@ -9,7 +9,7 @@
 @mixin buttonStyle ($bgColor, $fColor) {
     padding: 0.5rem 1rem;
     background: $bgColor;
-    color: $fColor;
+    color: $fColor !important;
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: $mainSpacing;

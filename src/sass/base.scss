@@ -370,3 +370,13 @@ a> :active {
    color: inherit;
    text-decoration: none;
 }
+
+.container {
+   width: $containerWidth;
+   margin: auto;
+   max-width: $maxWidth;
+}
+
+.button-main {
+   @include buttonStyle($primaryColor, $fontSubColor);
+}
