@@ -1,4 +1,3 @@
-//Border style (example)
 @mixin borderStyle($bColor) {
     border: 1px solid $bColor;
     -webkit-border-radius: 3px;
@@ -10,7 +9,7 @@
 @mixin buttonStyle ($bgColor, $fColor) {
     padding: 0.5rem 1rem;
     background: $bgColor;
-    color: $fColor;
+    color: $fColor !important;
     display: inline-block;
     text-transform: uppercase;
     letter-spacing: $mainSpacing;
@@ -18,4 +17,16 @@
     border: 1px solid $bgColor;
     cursor: pointer;
     margin: $mainSpacing;
-  }
+}
+
+@mixin tablet {
+    @media screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: 991px) {
+        @content;
+    }
+}
