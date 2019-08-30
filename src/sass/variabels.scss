@@ -20,6 +20,10 @@ $fontHeadingTitleColor: #c59d40;
 $buttonBookting: #0FAADC;
 $buttonBookingHover: lighten($buttonBookting, 40);
 $buttonBookingDisable: #C4C4C4;
+//Used for defining grids
+$x3grid: repeat(3, 1fr);
+$x6grid: repeat(6, 1fr);
+$x12grid: repeat(12, 1fr);
 
 // Spacing
 $mainSpacing: 0.3rem;
