@@ -10,7 +10,7 @@ export default class Home extends Component {
         <Navbar />
         <div>
           <h1>Home</h1>
-          <button className="button-main">Test knapp</button>
+          
         </div>
         <Footer />
       </>
