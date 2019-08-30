@@ -1,12 +1,38 @@
 import React, { Component } from "react";
+import { FaBars } from "react-icons/fa";
 import "./navbar.scss";
 
-export default class Navbar extends Component {
+interface IState {
+  isOpen: boolean;
+}
+class Navbar extends Component<{}, IState> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      isOpen: true
+    };
+  }
+
+  toggleNavbar = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  closeNavbar = () => {
+    if (this.state.isOpen === true) {
+      this.toggleNavbar();
+    }
+  };
+
   render() {
+    const display = this.state.isOpen;
+    const navbarDisplay = display ? `hide` : `show`;
+
     return (
-      <div>
+      <header>
         <nav>
-          <ul>
+          <FaBars className="react-icon" onClick={this.toggleNavbar} />
+          <ul className={`navbar ${navbarDisplay}`}>
             <li>
               <a href="/">HOME</a>
             </li>
@@ -17,11 +43,12 @@ export default class Navbar extends Component {
               <a href="/about">OM OSS</a>
             </li>
             <li>
-              <a href="/">KONTAKT</a>
+              <a href="#">KONTAKT</a>
             </li>
           </ul>
         </nav>
-      </div>
+      </header>
     );
   }
 }
+export default Navbar;

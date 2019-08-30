@@ -1,5 +1,118 @@
 @import "../../sass/style.scss";
 
-.button-main {
-    @include buttonStyle($primaryColor, $fontSubColor);
+
+@media only screen and (min-width: $sm) {
+    .home-container {
+
+        display: grid;
+        grid-template-rows: 0.1fr 1fr 1fr 0.1fr;
+        width: 100vw;
+        height: 100vh;
+        border: 1px dotted red;
+
+        Navbar {
+            grid-row: 1 / 2;
+        }
+
+        .hero-container {
+            grid-row: 2 / 3;
+            display: grid;
+            grid-template-rows: 0.1fr 0.1fr 0.3fr 0.1fr 0.3fr;
+            grid-template-columns: $x6grid;
+            background-image: linear-gradient(180deg, rgba(31, 32, 65, 0) 0%, #333333 100%), url(../../assets/images/ARKK-logo.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            @font-face {
+                font-family: 'Vonique 43';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Vonique 43'), local('Vonique43'),
+                     url('../../assets/fonts/Vonique43-2AAo.ttf') format('truetype'), /* Safari, Android, iOS */
+                     
+              }
+
+            
+
+            h1 {
+                grid-column: span 7;
+                text-align: center;
+                grid-row: 1 / 2;
+                font-family: Vonique43;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 4rem;
+                text-decoration-line: underline;
+            }
+
+            h4 {
+                grid-column: span 7;
+                text-align: center;
+                grid-row: 2 / 3;
+                font-family: Capitalis;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 1.9rem;
+                line-height: 26px;
+            }
+
+            .button-main {
+                @include buttonStyle($primaryColor, $fontSubColor);
+                grid-column: 3 / 5;
+                grid-row: 4 / 5;
+            }
+        }
+
+        .intro-container {
+            grid-row: 3 / 4;
+            display: grid;
+            grid-template-rows: 2fr 0.3fr;
+            grid-template-columns: $x6grid;
+            background-color: $primaryColorSub;
+
+            p {
+                padding-top: 15%;
+                font-family: Capitalis;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 1rem;
+                line-height: 30px;
+                text-align: center;
+                grid-column: 2 / 6;
+
+                color: #C59D40;
+
+            }
+        }
+
+        Footer {
+            grid-row: 4 / 5;
+        }
+
+    }
+
+}
+
+@media only screen and (max-width: $md) {
+    .home-container {
+        
+        border: 1px dotted black;
+    }
+}
+
+@media only screen and (max-width: $lg) {
+    .home-container {
+    
+    }
+
+    .button-main {
+        @include buttonStyle(purple, blue);
+    }
+}
+
+@media only screen and (max-width: $xl) {
+    .home-container {
+        
+    }
 }

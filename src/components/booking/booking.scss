@@ -1,0 +1,27 @@
+.container{
+    background-color: red;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100% 1fr 1fr;
+    grid-template-areas: "box1 box2"
+    "box3 box3"
+    "box4 box4";
+    justify-items: center;
+}
+
+.box1{
+    grid-area: box1;
+}
+
+.box2{
+    grid-area: box2;
+}
+
+.box3{
+    grid-area: box3;
+    background-color: green;
+}
+
+.box4{
+    grid-area: box4;
+}
