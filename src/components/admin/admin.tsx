@@ -34,13 +34,68 @@ class Admin extends Component<{}, IAdminState> {
     });
   }
 
-  // Set states
+  // Set initial states
   setAdminStates = (bookings: any) => {
     this.setState({ bookings: bookings.data.bookings });
     console.log(this.state.bookings);
   };
 
+  // Decrement state of number_of_guests in database
+  decrement = (id: number) => {
+    let tempBookings: IBooking[] = [...this.state.bookings];
+    let bookingToUpdate = tempBookings.find(
+      booking => booking.booking_id === id
+    );
+
+    // Decrement a number of guests only if it is more than 0, otherwise do nothing
+    if (bookingToUpdate!.number_of_guests > 0) {
+      bookingToUpdate!.number_of_guests--;
+    }
+
+    this.setState({
+      bookings: [...tempBookings]
+    });
+  };
+
+  // Increment state of number_of_guests
+  increment = (id: number) => {
+    let tempBookings: IBooking[] = [...this.state.bookings];
+    let bookingToUpdate = tempBookings.find(
+      booking => booking.booking_id === id
+    );
+
+    // Decrement a number of guests only if it is more than 0
+    if (bookingToUpdate!.number_of_guests < 6) {
+      bookingToUpdate!.number_of_guests++;
+      // Otherwise show an error message
+    } else {
+      window.alert("max of number of guests at one booking is 6.");
+    }
+
+    this.setState({
+      bookings: [...tempBookings]
+    });
+  };
+
+  // Update a booking in database
+  updateBooking = (id: number) => {
+    let bookingToUpdate = this.state.bookings.find(
+      booking => booking.booking_id === id
+    );
+
+    // Instantiate for api connection and run delete method
+    let data = new Data();
+    data.updateData(bookingToUpdate);
+
+    // Read updated database
+    this.getBooking();
+    window.alert("A booking in database has been updated");
+  };
+
+  // Remove a booking from database
   removeBooking = (booking_id: number) => {
+    // Confirm if a user wants to delete
+    window.confirm("Are you sure?");
     // Create parameter for delete method
     let delete_booking = {
       booking_id: booking_id
@@ -66,53 +121,71 @@ class Admin extends Component<{}, IAdminState> {
           <div className="booking-list-container">
             {/* Show table if there is booking */}
             {hasBooking ? (
-              <table>
-                <tbody>
-                  <tr>
-                    {/* Table header */}
-                    <th className="list-header">ID</th>
-                    <th className="list-header">Datum</th>
-                    <th className="list-header">Tid</th>
-                    <th className="list-header">Namn</th>
-                    <th className="list-header">E-post</th>
-                    <th className="list-header">Antal</th>
-                    <th className="list-header">Update</th>
-                    <th className="list-header">Ta bort</th>
-                    {/* Table row */}
-                  </tr>
-                  {this.state.bookings.map(bookings => (
-                    <tr key={bookings.booking_id}>
-                      <td className="list-header">{bookings.booking_id}</td>
-                      <td className="list-header">{bookings.date}</td>
-                      <td className="list-data">{bookings.time}</td>
-                      <td className="list-data">{bookings.name}</td>
-                      <td className="list-data">{bookings.email}</td>
-                      <td className="list-data">
-                        <FaChevronCircleUp />
-                        {bookings.number_of_guests}
-                        <FaChevronCircleDown />
-                      </td>
-                      <td className="list-data"></td>
-                      <td className="list-data">
-                        <FaTrash
-                          className="admin-icon"
-                          onClick={() =>
-                            this.removeBooking(bookings.booking_id)
-                          }
-                        />
-                      </td>
+              <div className="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      {/* Table header */}
+                      <th className="list-header">ID</th>
+                      <th className="list-header">Datum</th>
+                      <th className="list-header">Tid</th>
+                      <th className="list-header">Namn</th>
+                      <th className="list-header">E-post</th>
+                      <th className="list-header">Antal</th>
+                      <th className="list-header">Ta bort</th>
+                      {/* Table row */}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {this.state.bookings.map(bookings => (
+                      <tr key={bookings.booking_id}>
+                        <td className="list-header">{bookings.booking_id}</td>
+                        <td className="list-header">{bookings.date}</td>
+                        <td className="list-data">{bookings.time}</td>
+                        <td className="list-data">{bookings.name}</td>
+                        <td className="list-data">{bookings.email}</td>
+                        <td className="list-center">
+                          <FaChevronCircleDown
+                            className="react-icon admin-icon"
+                            onClick={() => this.decrement(bookings.booking_id)}
+                          />
+                          {bookings.number_of_guests}
+                          <FaChevronCircleUp
+                            className="react-icon admin-icon"
+                            onClick={() => this.increment(bookings.booking_id)}
+                          />
+
+                          <button
+                            onClick={() =>
+                              this.updateBooking(bookings.booking_id)
+                            }
+                          >
+                            UPDATE
+                          </button>
+                        </td>
+                        <td className="list-center">
+                          <FaTrash
+                            className="react-icon admin-icon booking-button"
+                            onClick={() =>
+                              this.removeBooking(bookings.booking_id)
+                            }
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             ) : (
               // Show message instead of table if there is no booking
-              <p>There is no booking yet.</p>
+              <p>
+                There is no booking yet or you have database connection problem.
+              </p>
             )}
           </div>
 
           <div className="link-container">
-            <Link to="/" className="button-main backToHome">
+            <Link to="/" className="button-main">
               back to home
             </Link>
           </div>
