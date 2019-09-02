@@ -8,7 +8,7 @@ export default class About extends Component {
     return (
       <>
         <div className="about">
-        <div className="heroImageAbout"></div>
+            <div className="heroImageAbout"></div>
             <Navbar />
           <div className="container">
 
