@@ -136,9 +136,9 @@ class Admin extends Component<{}, IAdminState> {
                       <th className="list-header">E-post</th>
                       <th className="list-header">Antal</th>
                       <th className="list-header">Ta bort</th>
-                      {/* Table row */}
                     </tr>
                   </thead>
+                  {/* Table body */}
                   <tbody>
                     {this.state.bookings.map(bookings => (
                       <tr key={bookings.booking_id}>
