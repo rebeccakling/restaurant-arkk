@@ -7,7 +7,7 @@ class VideoBackground extends React.Component {
       }
     render() {
         const videoOptions = {
-          src: './../../assets/videos/fish.mp4',
+          src: '../../assets/videos/fish.mp4',
           autoPlay: true,
           loop: true,
           muted: true
