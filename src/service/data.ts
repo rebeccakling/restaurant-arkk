@@ -1,7 +1,8 @@
+import IBooking from "../interfaces/ibooking";
 const axios = require("axios");
 
 class Data {
-  readData(): Promise<any> {
+  readData(): Promise<IBooking> {
     return axios
       .get("http://localhost:8888/crud/read.php")
       .then((result: any) => {
@@ -27,8 +28,8 @@ class Data {
       });
   }
 
-  updateData(updateData: any) {
-    axios
+  updateData(updateData: any): Promise<IBooking> {
+    return axios
       .post("http://localhost:8888/crud/update.php", updateData, {
         headers: { "Content-Type": "text/plain" }
       })

@@ -3,11 +3,10 @@
 .admin {
 
     .container {
-        overflow-x: auto;
         align-content: center;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: fit-content(auto) 1fr 1fr;
         grid-template-areas: "title-container title-container title-container""booking-list-container booking-list-container booking-list-container"". link-container .";
     }
 
@@ -21,38 +20,92 @@
 
     .link-container {
         grid-area: link-container;
-        margin: auto;
+        text-align: center;
     }
 
     h1 {
         text-align: center;
     }
 
-    div {
-        border: 1px dotted pink;
+    .table-wrapper table {
+        border-collapse: collapse;
+        text-align: left;
     }
 
+    // To solve a right gap between table and table wrapper
     table {
-        // margin: auto;
+        width: 101%;
+    }
+
+    .table-wrapper {
+        background: $backgroundColor;
+        overflow: hidden;
         border: 1px solid $subColor;
-        border-collapse: collapse;
-        border-spacing: 0;
+        -webkit-border-radius: $mainRadius;
+        -moz-border-radius: $mainRadius;
+        border-radius: $mainRadius;
         width: 100%;
 
-        th,
-        td {
-            border: 1px solid $subColor;
+        td,
+        th {
+            padding: $mainSpacing $spacingBetweenDiv;
         }
 
         th {
-            background: $primaryColorSub;
-            color: $fontSubColor;
-            text-transform: uppercase;
+            background-color: $primaryColorSub;
+            color: $fontHeadingTitleColor;
+            font-weight: bold;
+            border-left: 2px solid lighten($primaryColorSub, 50);
+            text-align: center;
+
+            &:first-child {
+                border: none;
+            }
+
+        }
+
+        td {
+            border-left: 1px solid lighten($primaryColorSub, 50);
+            font-weight: normal;
+
+            &:first-child {
+                border-left: none;
+            }
+        }
+
+        tr {
+            &:nth-child(odd) {
+                background: lighten($primaryColorSub, 75);
+            }
+
+            &:last-child td {
+                border-bottom: none;
+            }
         }
     }
 
-    Link {
-        margin: 0 auto;
+    .admin-icon {
+        padding: $mainSpacing;
+        margin: $mainSpacing;
+        vertical-align: middle;
+        font-size: 1.5rem;
+    }
+
+    .list-center {
+        text-align: center;
+    }
+
+    button,
+    .booking-button {
+        @include buttonStyle($buttonBookting, $fontSubColor);
+
+        &:hover {
+            @include buttonStyle($buttonBookingHover, $fontSubColor);
+        }
+    }
+
+    .link-container {
+        margin-top: $spacingBetweenDiv;
     }
 
 }
