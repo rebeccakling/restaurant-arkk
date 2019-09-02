@@ -30,15 +30,15 @@ class Admin extends Component<{}, IAdminState> {
     // Instantiate for api connection and run read method
     let data = new Data();
     data.readData().then((result: any) => {
-      this.setAdminStates(result);
+      // If there is a result from database update setate with the result
+      if (result) {
+        this.setState({ bookings: result.data.bookings });
+        // If there is NOT, set empty array instead
+      } else {
+        this.setState({ bookings: [] });
+      }
     });
   }
-
-  // Set initial states
-  setAdminStates = (bookings: any) => {
-    this.setState({ bookings: bookings.data.bookings });
-    console.log(this.state.bookings);
-  };
 
   // Decrement state of number_of_guests in database
   decrement = (id: number) => {
@@ -85,32 +85,35 @@ class Admin extends Component<{}, IAdminState> {
 
     // Instantiate for api connection and run delete method
     let data = new Data();
-    data.updateData(bookingToUpdate);
-
-    // Read updated database
-    this.getBooking();
-    window.alert("A booking in database has been updated");
+    data.updateData(bookingToUpdate).then((result: any) => {
+      // Read updated database
+      this.getBooking();
+      window.alert("A booking in database has been updated");
+    });
   };
 
   // Remove a booking from database
   removeBooking = (booking_id: number) => {
     // Confirm if a user wants to delete
-    window.confirm("Are you sure?");
-    // Create parameter for delete method
-    let delete_booking = {
-      booking_id: booking_id
-    };
+    let okToRemove = window.confirm("Are you sure?");
 
-    // Instantiate for api connection and run delete method
-    let data = new Data();
-    data.deleteData(delete_booking);
+    if (okToRemove) {
+      // Create parameter for delete method
+      let delete_booking = {
+        booking_id: booking_id
+      };
 
-    // Read updated database
-    this.getBooking();
+      // Instantiate for api connection and run delete method
+      let data = new Data();
+      data.deleteData(delete_booking);
+
+      // Read updated database
+      this.getBooking();
+    }
   };
 
   render() {
-    const hasBooking = this.state.bookings;
+    const hasBooking = this.state.bookings.length > 0;
     return (
       <main className="admin">
         <div className="container">
@@ -160,7 +163,7 @@ class Admin extends Component<{}, IAdminState> {
                               this.updateBooking(bookings.booking_id)
                             }
                           >
-                            UPDATE
+                            UPPDATERA
                           </button>
                         </td>
                         <td className="list-center">
@@ -186,7 +189,7 @@ class Admin extends Component<{}, IAdminState> {
 
           <div className="link-container">
             <Link to="/" className="button-main">
-              back to home
+              &#60;&#60;Startsida
             </Link>
           </div>
         </div>
