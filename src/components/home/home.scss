@@ -2,28 +2,26 @@
 
 
 
-    .home {
-
+.home {
+    
+    .hero-container {
+        grid-row: 1 / 2;
+        background-image: linear-gradient(180deg, rgba(31, 32, 65, 0) 0%, #333333 100%), url(../../assets/images/ARKK-logo.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 400px;
+        
+    }
 
         
         .container{
-            display: grid;
-            grid-template-rows: 0.5fr 0.1fr 1fr;
             width: 100vw;
 
             Navbar {
                 grid-row: 2 / 3;
             }
     
-            .hero-container {
-                grid-row: 1 / 2;
-                background-image: linear-gradient(180deg, rgba(31, 32, 65, 0) 0%, #333333 100%), url(../../assets/images/ARKK-logo.svg);
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                height: 400px;
-                
-            }
     
             .intro-container {
                 grid-row: 3 / 4;

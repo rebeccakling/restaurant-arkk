@@ -9,25 +9,25 @@ export default class Home extends Component {
     return (
       <>
       <main className="home">
-      <div className="container">
-        
-        <div className="hero-container" >
-          <VideoBackground />
-        </div>
-        <Navbar />
-        <div className="intro-container">
-          <p>
-          Svenska smaker fångade här och nu.<br></br>
-          <br/>
-          Välkommen till vår gastronomiska värld.<br></br>
-          <br/>
- 
-          Vårt val att arbeta med svenska råvaror gör att vi är helt i händerna på det naturen erbjuder oss under året. Det föder kreativitet på ett sätt vi älskar. Med alla samlade erfarenheter från åren som gått och självsäkerheten de gett oss har vi idag format ett helt eget uttryck, både i köket och matsalen. 
-          </p>
-        </div>
+      <div className="hero-container" >
+        <VideoBackground />
       </div>
-      <Footer />
+      <Navbar />
+        <div className="container">
+        
+          <div className="intro-container">
+            <p>
+            Svenska smaker fångade här och nu.<br></br>
+            <br/>
+            Välkommen till vår gastronomiska värld.<br></br>
+            <br/>
+ 
+            Vårt val att arbeta med svenska råvaror gör att vi är helt i händerna på det naturen erbjuder oss under året. Det föder kreativitet på ett sätt vi älskar. Med alla samlade erfarenheter från åren som gått och självsäkerheten de gett oss har vi idag format ett helt eget uttryck, både i köket och matsalen. 
+            </p>
+          </div>
+        </div>
       </main>
+      <Footer />
 
       </>
       
