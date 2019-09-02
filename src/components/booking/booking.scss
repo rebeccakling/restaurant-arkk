@@ -45,18 +45,38 @@
                 margin-top: 30px;
 
                 input {
+                    height: 30px;
                     margin-bottom: 10px;
+                    max-width: 340px;
+                    background-color: transparent;
+                    border: none;
+                    border-bottom: 2px solid black;
+                    font-size: 2em;
                 }
 
-                button{
+                input:focus, textarea:focus {
+                    outline: none;
+                }
+
+                select{
+                    background-color: transparent;
+                }
+
+                label{
+                    font-size: 0.8em;
+                }
+
+                button {
                     @include buttonStyle($buttonBookting, $fontSubColor);
-                    :hover{
+
+                    &:hover {
                         @include buttonStyle($buttonBookingHover, $fontSubColor);
                     }
                 }
             }
 
-            h3{
+
+            h3 {
                 margin-bottom: 30px;
             }
         }
