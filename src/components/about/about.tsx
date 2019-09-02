@@ -8,9 +8,9 @@ export default class About extends Component {
     return (
       <>
         <div className="about">
-          <div className="container">
             <div className="heroImageAbout"></div>
             <Navbar />
+          <div className="container">
 
             <div className="aboutUsInfo">
               <div className="aboutArkk">
