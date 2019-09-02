@@ -98,9 +98,9 @@ class Booking extends React.Component<{}, State> {
     console.log("GDPR: ", this.state.gdpr)
 
     return (
-      <div>
-        <Navbar />
+      <>
         <main className="booking">
+        <Navbar />
           <div className="wrapper">
             <div className="container">
               <div className="guests">
@@ -166,7 +166,7 @@ class Booking extends React.Component<{}, State> {
           </div>
         </main>
         <Footer />
-      </div>
+      </>
     );
   }
 }
