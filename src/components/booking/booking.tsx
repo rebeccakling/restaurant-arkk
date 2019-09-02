@@ -9,6 +9,7 @@ import Navbar from "../navbar/navbar";
 interface State {
   data: Data;
   date: Date;
+  gdpr: boolean;
   booking: any;
 }
 
@@ -20,13 +21,14 @@ class Booking extends React.Component<{}, State> {
     this.state = {
       data: new Data(),
       date: new Date(),
+      gdpr: false,
       booking: {
         number_of_guests: '0',
         date: moment(),
         time: '0',
         name: '',
         email: '',
-        phone_number: ''
+        phone_number: '',
       }
     }
 
@@ -54,15 +56,25 @@ class Booking extends React.Component<{}, State> {
   handleInputChange(event: any) {
     event.preventDefault();
     const target = event.target;
-    const value = target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const newName = target.name;
+
+    console.log("Current state (before): ", this.state.booking.gdpr);
 
     this.setState(prevState => {
       let booking = Object.assign({}, prevState.booking);
       booking[newName] = value;
+      console.log(booking);
       return { booking };
-    })
+    });
+
     this.setDate(this.state.date);
+  }
+
+  handleGdprChange = (event: any) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({ gdpr: value })
   }
 
 
@@ -83,8 +95,10 @@ class Booking extends React.Component<{}, State> {
 
   render() {
 
+    console.log("GDPR: ", this.state.gdpr)
+
     return (
-      <>
+      <div>
         <Navbar />
         <main className="booking">
           <div className="wrapper">
@@ -126,16 +140,24 @@ class Booking extends React.Component<{}, State> {
                       onChange={this.handleInputChange} />
                   </label><br />
                   <label>
-                    EPOSTADRESS:<br />
+                    E-POSTADRESS:<br />
                     <input type="email" name="email"
                       value={this.state.booking.email}
                       onChange={this.handleInputChange} />
                   </label><br />
                   <label>
                     MOBILTELEFON:<br />
-                    <input type="text" name="phone_number"
+                    <input className="inp" type="text" name="phone_number"
                       value={this.state.booking.phone_number}
                       onChange={this.handleInputChange} />
+                  </label><br />
+                  <label>
+                    GDPR: <br />
+                    <input
+                      name="gdpr"
+                      type="checkbox"
+                      checked={this.state.booking.gdpr}
+                      onChange={this.handleGdprChange} />
                   </label><br />
                   <button onClick={this.completeBooking}>BOKA</button>
                 </form>
@@ -144,7 +166,7 @@ class Booking extends React.Component<{}, State> {
           </div>
         </main>
         <Footer />
-      </>
+      </div>
     );
   }
 }
