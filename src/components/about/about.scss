@@ -3,8 +3,6 @@
 .about {
     display: grid;
 
-    .container {
-
     .heroImageAbout {
         background-image: url(../../assets/images/heroimage-about.jpg);
         background-position: center;
@@ -18,6 +16,8 @@
             grid-row: 2 / 3;
         }    
     }
+
+    .container {
 
     .aboutUsInfo {
     
