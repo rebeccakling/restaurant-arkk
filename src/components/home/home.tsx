@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import Footer from "../footer/footer";
 import Navbar from "../navbar/navbar";
 import "./home.scss"
+import VideoBackground from "../video-background/video-background";
 
 export default class Home extends Component {
   render() {
     return (
       <>
-      <div className="home-container">
-        <div className="hero-container">
+      <main className="home">
+      <div className="container">
+        
+        <div className="hero-container" >
+          <VideoBackground />
         </div>
         <Navbar />
         <div className="intro-container">
@@ -23,6 +27,7 @@ export default class Home extends Component {
         </div>
       </div>
       <Footer />
+      </main>
 
       </>
       
