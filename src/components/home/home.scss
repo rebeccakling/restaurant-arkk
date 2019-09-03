@@ -3,48 +3,61 @@
 
 
 .home {
-    
+
     .hero-container {
         grid-row: 1 / 2;
-        background-image: linear-gradient(180deg, rgba(31, 32, 65, 0) 0%, #333333 100%), url(../../assets/images/ARKK-logo.svg);
+        background-image: linear-gradient(180deg, rgba(31, 32, 65, 0) 50%, black 100%), url(../../assets/images/ARKK-logo.png);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         height: 400px;
-        
+
     }
 
-        
-        .container{
-            width: 100vw;
 
-            Navbar {
-                grid-row: 2 / 3;
-            }
-    
-    
-            .intro-container {
-                grid-row: 3 / 4;
-                display: grid;
-                grid-template-rows: 2fr 0.3fr;
-                grid-template-columns: $x6grid;
-                background-color: $backgroundColor;
-    
-                p {
-                    padding-top: 15%;
-                    font-family: Capitalis;
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 1rem;
-                    line-height: 30px;
-                    text-align: center;
-                    grid-column: 2 / 6;
-    
-                    color: $fontColorMain;
-    
-                }
-            }
+    .container {
+        width: 100vw;
+        background-image: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 50%), linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 50%), url(../../assets/images/info_background.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        Navbar {
+            grid-row: 2 / 3;
         }
 
 
+        .intro-container {
+            grid-row: 3 / 4;
+            display: grid;
+            grid-template-rows: 0.1fr 0.1fr;
+            grid-template-columns: $x6grid;
+
+
+            h2 {
+                padding: 5% 0;
+                grid-row: 1 / 2;
+                grid-column: span 7;
+                text-align: center;
+                color: $fontHeadingTitleColor;
+                font-family: $fontHeadingTitle;
+
+            }
+
+            p {
+                padding-bottom: 5%;
+                font-family: $fontBody;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 1rem;
+                line-height: 30px;
+                text-align: center;
+                grid-column: 2 / 6;
+                color: $fontColorMain;
+
+            }
+        }
     }
+
+
+}
