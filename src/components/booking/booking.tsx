@@ -11,6 +11,7 @@ interface State {
   date: Date;
   gdpr: boolean;
   booking: any;
+  bookings: any;
 }
 
 class Booking extends React.Component<{}, State> {
@@ -29,7 +30,9 @@ class Booking extends React.Component<{}, State> {
         name: '',
         email: '',
         phone_number: '',
-      }
+      },
+
+      bookings: []
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -89,20 +92,27 @@ class Booking extends React.Component<{}, State> {
 
     this.state.data.readData().then((result: any) => {
 
+      if (result) {
+        this.setState({ bookings: result.data.bookings });
+        // If there is NOT, set empty array instead
+      } else {
+        this.setState({ bookings: [] });
+      }
+
       const object = [];
 
-      for (let i = 0; i < result.data.bookings.length; i++) {
-        console.log(result.data.bookings.length)
-        const element = result.data.bookings[i];
+      for (let i = 0; i < this.state.bookings.length; i++) {
+        console.log(this.state.bookings.length)
+        const element = this.state.bookings[i];
 
         if(element.date === this.state.booking.date && element.time === this.state.booking.time){
           object.push(element)
         }
       }
-      if(object.length < 15){
+      if(object.length < 15 && this.state.gdpr === true){
         this.state.data.createData(create_booking);
       }else{
-        console.log("full bokat")
+        console.log("error")
       }
     });
   }
