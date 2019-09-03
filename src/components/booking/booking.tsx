@@ -5,6 +5,7 @@ import moment from 'moment';
 import Data from '../../service/data';
 import Footer from "../footer/footer";
 import Navbar from "../navbar/navbar";
+import { FaThemeisle } from "react-icons/fa";
 
 interface State {
   data: Data;
@@ -43,8 +44,37 @@ class Booking extends React.Component<{}, State> {
 
 
   handleDateChange = (date: any) => {
+    if(this.state.booking.time === "0" || this.state.booking.number_of_guests === "0"){
+      alert("välj tid och gäster")
+    }else{
     this.setState({ date })
     this.setDate(date);
+
+    this.state.data.readData().then((result: any) => {
+
+      if (result) {
+        this.setState({ bookings: result.data.bookings });
+        // If there is NOT, set empty array instead
+      } else {
+        this.setState({ bookings: [] });
+      }
+
+      const object = [];
+      for (let i = 0; i < this.state.bookings.length; i++) {
+        console.log(this.state.bookings.length)
+        const element = this.state.bookings[i];
+
+        if(element.date === this.state.booking.date && element.time === this.state.booking.time){
+          object.push(element)
+        }
+      }
+      if(object.length < 15){
+        alert("tid finns")
+      }else{
+        alert("Datum fullbokat")
+      }
+    });
+  }
   }
 
   setDate(date: any) {
@@ -106,7 +136,7 @@ class Booking extends React.Component<{}, State> {
         const element = this.state.bookings[i];
 
         if(element.date === this.state.booking.date && element.time === this.state.booking.time){
-          object.push(element)
+            object.push(element)
         }
       }
       if(object.length < 15 && this.state.gdpr === true){
@@ -169,7 +199,7 @@ class Booking extends React.Component<{}, State> {
                   </label><br />
                   <label>
                     MOBILTELEFON:<br />
-                    <input className="inp" type="text" name="phone_number"
+                    <input type="text" name="phone_number"
                       value={this.state.booking.phone_number}
                       onChange={this.handleInputChange} />
                   </label><br />
