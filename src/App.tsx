@@ -8,6 +8,7 @@ import Home from "./components/home/home";
 import Admin from "./components/admin/admin";
 import About from "./components/about/about";
 import Booking from "./components/booking/booking";
+import Confirmation from "./components/confirmation/confirmation";
 
 let create_booking = {
   number_of_guests: 6,
@@ -55,6 +56,7 @@ class App extends React.Component<{}, {}> {
           <Route exact path="/about" component={About} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/booking" component={Booking} />
+          <Route exact path="/confirmation" component={Confirmation} />
           <Route component={Home} />
         </Switch>
       </BrowserRouter>
