@@ -56,15 +56,12 @@ class Booking extends React.Component<{}, State> {
   handleInputChange(event: any) {
     event.preventDefault();
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const value = target.value;
     const newName = target.name;
-
-    console.log("Current state (before): ", this.state.booking.gdpr);
 
     this.setState(prevState => {
       let booking = Object.assign({}, prevState.booking);
       booking[newName] = value;
-      console.log(booking);
       return { booking };
     });
 
@@ -90,17 +87,32 @@ class Booking extends React.Component<{}, State> {
       "phone_number": this.state.booking.phone_number
     }
 
-    this.state.data.createData(create_booking);
+    this.state.data.readData().then((result: any) => {
+
+      const object = [];
+
+      for (let i = 0; i < result.data.bookings.length; i++) {
+        console.log(result.data.bookings.length)
+        const element = result.data.bookings[i];
+
+        if(element.date === this.state.booking.date && element.time === this.state.booking.time){
+          object.push(element)
+        }
+      }
+      if(object.length < 15){
+        this.state.data.createData(create_booking);
+      }else{
+        console.log("full bokat")
+      }
+    });
   }
 
   render() {
 
-    console.log("GDPR: ", this.state.gdpr)
-
     return (
       <>
         <main className="booking">
-        <Navbar />
+          <Navbar />
           <div className="wrapper">
             <div className="container">
               <div className="guests">
@@ -154,6 +166,7 @@ class Booking extends React.Component<{}, State> {
                   <label>
                     GDPR: <br />
                     <input
+                      className="gdprCheckbox"
                       name="gdpr"
                       type="checkbox"
                       checked={this.state.booking.gdpr}
