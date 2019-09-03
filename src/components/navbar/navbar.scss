@@ -2,13 +2,13 @@
 
 header {
     padding: 1rem 0;
-    background: black;
+    background: $primaryColorSub;
     text-align: center;
     width: 100%;
 }
 
 nav {
-    background: black;
+    background: $primaryColorSub;
     text-align: center;
     width: $containerWidth;
     max-width: $maxWidth;

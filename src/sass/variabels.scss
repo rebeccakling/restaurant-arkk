@@ -6,12 +6,12 @@ $fontBodySize: 17px;
 // Color
 $backgroundColor: #fff;
 $primaryColor: #c59d40;
-$primaryColorSub: #333;
+$primaryColorSub: #000;
 $subColor: #C4C4C4;
 
 
 // Font color
-$fontColorMain: #333;
+$fontColorMain: #000;
 $fontSubColor: #fff;
 $hoverColor: #c59d40;
 $fontHeadingTitleColor: #c59d40;
@@ -20,6 +20,7 @@ $fontHeadingTitleColor: #c59d40;
 $buttonBookting: #0FAADC;
 $buttonBookingHover: lighten($buttonBookting, 40);
 $buttonBookingDisable: #C4C4C4;
+
 //Used for defining grids
 $x3grid: repeat(3, 1fr);
 $x6grid: repeat(6, 1fr);
