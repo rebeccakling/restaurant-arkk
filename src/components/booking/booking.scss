@@ -9,6 +9,7 @@
         justify-items: center;
 
         .container {
+
             margin: 30px 0;
             max-width: 500px;
             display: grid;
@@ -20,18 +21,10 @@
 
             .guests {
                 grid-area: guests;
-
-                option {
-                    width: 60px;
-                }
             }
 
             .time {
                 grid-area: time;
-
-                option {
-                    width: 60px;
-                }
             }
 
             .calendar {
@@ -45,6 +38,7 @@
                 margin-top: 30px;
 
                 input {
+                    width: 400px;
                     height: 30px;
                     margin-bottom: 10px;
                     max-width: 340px;
@@ -54,15 +48,16 @@
                     font-size: 2em;
                 }
 
-                input:focus, textarea:focus {
+                input:focus,
+                textarea:focus {
                     outline: none;
                 }
 
-                select{
+                select {
                     background-color: transparent;
                 }
 
-                label{
+                label {
                     font-size: 0.8em;
                 }
 
