@@ -14,8 +14,8 @@ class Data {
       });
   }
 
-  createData(createData: any) {
-    axios
+  createData(createData: any): Promise<IBooking> {
+    return axios
       .post("http://localhost:8888/crud/create.php", createData, {
         headers: { "Content-Type": "text/plain" }
       })
