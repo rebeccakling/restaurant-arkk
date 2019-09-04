@@ -185,7 +185,9 @@ class Booking extends React.Component<{}, State> {
           }
         }
         if (object.length < 15 && this.state.gdpr === true) {
-          this.state.data.createData(create_booking);
+          this.state.data.createData(create_booking).then((result: any) => {
+            console.log(result.data.message);
+          });
           console.log(this.state.data);
         } else {
           console.log("error");
