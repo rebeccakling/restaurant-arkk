@@ -67,12 +67,23 @@
                     &:hover {
                         @include buttonStyle($buttonBookingHover, $fontSubColor);
                     }
+
+                    &:disabled {
+                        @include buttonStyle($subColor, $fontSubColor);
+                        cursor: default;
+                    }
                 }
+
             }
 
 
             h3 {
                 margin-bottom: 30px;
+            }
+
+            .error-message {
+                color: $errorMessage;
+                display: block;
             }
         }
     }
