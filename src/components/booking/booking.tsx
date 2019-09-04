@@ -7,6 +7,8 @@ import Footer from "../footer/footer";
 import Navbar from "../navbar/navbar";
 import { FaThemeisle } from "react-icons/fa";
 import { throwStatement } from "@babel/types";
+import Confirmation from "../confirmation/confirmation";
+import { Redirect } from "react-router-dom";
 
 interface State {
   data: Data;
@@ -20,9 +22,14 @@ interface State {
   gdprError: string;
   isShown: boolean;
   isDisable: boolean;
+  bookingId:any;
 }
 
-class Booking extends React.Component<{}, State> {
+interface IProps{
+  bookingId:any;
+}
+
+class Booking extends React.Component<IProps, State> {
   constructor(props: any) {
     super(props);
 
@@ -44,7 +51,8 @@ class Booking extends React.Component<{}, State> {
       phone_numberError: "",
       gdprError: "",
       isShown: false,
-      isDisable: true
+      isDisable: true,
+      bookingId:"0"
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -186,13 +194,16 @@ class Booking extends React.Component<{}, State> {
         }
         if (object.length < 15 && this.state.gdpr === true) {
           this.state.data.createData(create_booking).then((result: any) => {
-            console.log(result.data.message);
+            this.setState({bookingId: result.data.message});
+            // this.props.bookingId(this.state.bookingId);
+            // console.log(this.props.bookingId);
           });
           console.log(this.state.data);
         } else {
           console.log("error");
         }
-
+        
+        return <Redirect to="/confirmation" />
       });
     }
   }
@@ -255,6 +266,7 @@ class Booking extends React.Component<{}, State> {
       <>
         <main className="booking">
           <Navbar />
+          <Confirmation bookingId={this.state.bookingId}/>
           <div className="wrapper">
             <div className="container">
               <div className="guests">
