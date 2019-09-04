@@ -43,7 +43,7 @@ class Navbar extends Component<{}, IState> {
               <a href="/about">OM OSS</a>
             </li>
             <li>
-              <a href="#">KONTAKT</a>
+              <a href="/admin">KONTAKT</a>
             </li>
           </ul>
         </nav>
