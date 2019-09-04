@@ -4,6 +4,7 @@ import IBooking from "../../interfaces/ibooking";
 
 interface IConfirmationState{
   bookings: IBooking[];
+  latestBookingId: any;
 }
 
 class Confirmation extends Component <{}, IConfirmationState> {
@@ -12,7 +13,7 @@ class Confirmation extends Component <{}, IConfirmationState> {
 
     this.state = {
       bookings: [],
-
+      latestBookingId: 0
     };
   }
 
@@ -28,6 +29,7 @@ class Confirmation extends Component <{}, IConfirmationState> {
       // If there is a result from database update setate with the result
       if (result) {
         this.setState({ bookings: result.data.bookings });
+        this.test();
         // Get the latest booking
 
         // If there is NOT, set empty array instead
@@ -45,12 +47,16 @@ class Confirmation extends Component <{}, IConfirmationState> {
   // }
 
   test () {
+    let latestBookingAl = this.state.bookings.pop();
+    console.log(latestBookingAl);
+    let bookings = this.setState({ latestBookingId: latestBookingAl})
+    // ({ latestBookingId: this.state.bookings.pop()})
+    console.log(this.state.latestBookingId.booking_id);
+
+    return bookings
   }
   
   render() {
-    let bookings = this.state.bookings
-    let latestBooking = bookings.pop();
-    console.log(latestBooking);
     
     return (
       <div>
@@ -58,7 +64,7 @@ class Confirmation extends Component <{}, IConfirmationState> {
         {/* {this.state.bookings.map((bookings, index) => (
           <h1 key={index}>{bookings}</h1>
         ))} */}
-        <h1>{latestBooking}</h1>
+        <h1>{this.state.latestBookingId.booking_id}</h1>
       </div>
     )
   }
