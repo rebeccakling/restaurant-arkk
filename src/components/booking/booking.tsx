@@ -6,6 +6,7 @@ import Data from "../../service/data";
 import Footer from "../footer/footer";
 import Navbar from "../navbar/navbar";
 import { FaThemeisle } from "react-icons/fa";
+import { throwStatement } from "@babel/types";
 
 interface State {
   data: Data;
@@ -50,13 +51,11 @@ class Booking extends React.Component<{}, State> {
     this.completeBooking = this.completeBooking.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.setDate = this.setDate.bind(this);
+    this.validateDate = this.validateDate.bind(this);
   }
 
   handleDateChange = (date: any) => {
-    if (
-      this.state.booking.time === "0" ||
-      this.state.booking.number_of_guests === "0"
-    ) {
+    if (this.state.booking.time === "0" || this.state.booking.number_of_guests === "0") {
       alert("välj tid och gäster");
     } else {
       // Clear state
@@ -64,44 +63,8 @@ class Booking extends React.Component<{}, State> {
 
       this.setState({ date });
       this.setDate(date);
+      this.validateDate();
 
-      // Check if chosen date is later than today
-      if (this.state.booking.date <= moment().format("YYYY-MM-DD")) {
-        alert("Boka senare än idag");
-        console.log("before today> chosen date", this.state.booking.date);
-        console.log("before today> today", moment().format("YYYY-MM-DD"));
-      } else {
-        console.log("after today> chosen date", this.state.booking.date);
-        console.log("after today", moment().format("YYYY-MM-DD"));
-        this.state.data.readData().then((result: any) => {
-          if (result) {
-            this.setState({ bookings: result.data.bookings });
-            // If there is NOT, set empty array instead
-          } else {
-            this.setState({ bookings: [] });
-          }
-
-          const object = [];
-          for (let i = 0; i < this.state.bookings.length; i++) {
-            console.log(this.state.bookings.length);
-            const element = this.state.bookings[i];
-
-            if (
-              element.date === this.state.booking.date &&
-              element.time === this.state.booking.time
-            ) {
-              object.push(element);
-            }
-          }
-          if (object.length < 15) {
-            // Change isShown state to true to display input field
-            this.setState({ isShown: true });
-            alert("tid finns");
-          } else {
-            alert("Datum fullbokat");
-          }
-        });
-      }
     }
   };
 
@@ -110,6 +73,44 @@ class Booking extends React.Component<{}, State> {
       let booking = Object.assign({}, prevState.booking);
       booking.date = moment(date).format("YYYY-MM-DD");
       return { booking };
+    });
+  }
+
+  validateDate() {
+    // Check if chosen date is later than today
+    this.state.data.readData().then((result: any) => {
+      console.log("MOMENT", moment().format("YYYY-MM-DD"));
+      console.log("State Date", this.state.booking.date);
+      if (this.state.booking.date < moment().format("YYYY-MM-DD")) {
+        alert("Boka senare än idag");
+      } else {
+        if (result) {
+          this.setState({ bookings: result.data.bookings });
+          // If there is NOT, set empty array instead
+        } else {
+          this.setState({ bookings: [] });
+        }
+
+        const object = [];
+        for (let i = 0; i < this.state.bookings.length; i++) {
+          console.log(this.state.bookings.length);
+          const element = this.state.bookings[i];
+
+          if (
+            element.date === this.state.booking.date &&
+            element.time === this.state.booking.time
+          ) {
+            object.push(element);
+          }
+        }
+        if (object.length < 15) {
+          // Change isShown state to true to display input field
+          this.setState({ isShown: true });
+          // alert("tid finns");
+        } else {
+          this.setState({ isShown: false });
+        }
+      }
     });
   }
 
@@ -164,6 +165,7 @@ class Booking extends React.Component<{}, State> {
       this.state.data.readData().then((result: any) => {
         if (result) {
           this.setState({ bookings: result.data.bookings });
+
           // If there is NOT, set empty array instead
         } else {
           this.setState({ bookings: [] });
@@ -184,9 +186,11 @@ class Booking extends React.Component<{}, State> {
         }
         if (object.length < 15 && this.state.gdpr === true) {
           this.state.data.createData(create_booking);
+          console.log(this.state.data);
         } else {
           console.log("error");
         }
+
       });
     }
   }
@@ -194,9 +198,9 @@ class Booking extends React.Component<{}, State> {
   // Form validation
   validate = () => {
     // Regex patterns
-    const nameValidationPattern = /\w{3,}\s\w{3,}/;
+    const nameValidationPattern = /\w{2,}/;
     const emailValidationPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const phone_numberValidationPattern = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
+    const phone_numberValidationPattern = /^((((0{2}?)|(\+){1})46)|0)7[\d]{8}/;
 
     // Define variables for error messages
     let nameErrorToUpdate = "";
@@ -244,6 +248,7 @@ class Booking extends React.Component<{}, State> {
   };
 
   render() {
+    console.log(this.state.booking.date);
     return (
       <>
         <main className="booking">
@@ -289,7 +294,7 @@ class Booking extends React.Component<{}, State> {
               </div>
 
               <div className="contacts">
-                {this.state.isShown ? <p>Finns bordet</p> : null}
+                {this.state.isShown ? (<p>Finns bordet</p>) : null}
                 <h3>KONTAKTUPPGIFTER</h3>
                 <form>
                   <label>
