@@ -22,11 +22,12 @@ interface State {
   gdprError: string;
   isShown: boolean;
   isDisable: boolean;
-  bookingId:any;
+  bookingId: any;
+  isFullyBooked: boolean;
 }
 
-interface IProps{
-  bookingId:any;
+interface IProps {
+  bookingId: any;
 }
 
 class Booking extends React.Component<IProps, State> {
@@ -52,7 +53,8 @@ class Booking extends React.Component<IProps, State> {
       gdprError: "",
       isShown: false,
       isDisable: true,
-      bookingId:"0"
+      bookingId: "0",
+      isFullyBooked: true
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -63,7 +65,10 @@ class Booking extends React.Component<IProps, State> {
   }
 
   handleDateChange = (date: any) => {
-    if (this.state.booking.time === "0" || this.state.booking.number_of_guests === "0") {
+    if (
+      this.state.booking.time === "0" ||
+      this.state.booking.number_of_guests === "0"
+    ) {
       alert("välj tid och gäster");
     } else {
       // Clear state
@@ -72,7 +77,6 @@ class Booking extends React.Component<IProps, State> {
       this.setState({ date });
       this.setDate(date);
       this.validateDate();
-
     }
   };
 
@@ -87,8 +91,6 @@ class Booking extends React.Component<IProps, State> {
   validateDate() {
     // Check if chosen date is later than today
     this.state.data.readData().then((result: any) => {
-      console.log("MOMENT", moment().format("YYYY-MM-DD"));
-      console.log("State Date", this.state.booking.date);
       if (this.state.booking.date < moment().format("YYYY-MM-DD")) {
         alert("Boka senare än idag");
       } else {
@@ -99,28 +101,32 @@ class Booking extends React.Component<IProps, State> {
           this.setState({ bookings: [] });
         }
 
-        const object = [];
-        for (let i = 0; i < this.state.bookings.length; i++) {
-          console.log(this.state.bookings.length);
-          const element = this.state.bookings[i];
-
-          if (
-            element.date === this.state.booking.date &&
-            element.time === this.state.booking.time
-          ) {
-            object.push(element);
-          }
-        }
-        if (object.length < 15) {
-          // Change isShown state to true to display input field
-          this.setState({ isShown: true });
-          // alert("tid finns");
-        } else {
-          this.setState({ isShown: false });
-        }
+        this.isTableAvaiable();
       }
     });
   }
+
+  isTableAvaiable = () => {
+    const object = [];
+    for (let i = 0; i < this.state.bookings.length; i++) {
+      console.log(this.state.bookings.length);
+      const element = this.state.bookings[i];
+
+      if (
+        element.date === this.state.booking.date &&
+        element.time === this.state.booking.time
+      ) {
+        object.push(element);
+      }
+    }
+    if (object.length < 1) {
+      // Change isShown state to true to display input field
+      this.setState({ isShown: true });
+      // alert("tid finns");
+    } else {
+      this.setState({ isShown: false });
+    }
+  };
 
   handleInputChange(event: any) {
     event.preventDefault();
@@ -136,6 +142,24 @@ class Booking extends React.Component<IProps, State> {
 
     this.setDate(this.state.date);
   }
+
+  handleTimeChange = (event: any) => {
+    const target = event.target;
+    const value = target.value;
+    const newName = target.name;
+
+    this.setState(
+      prevState => {
+        let booking = Object.assign({}, prevState.booking);
+        booking[newName] = value;
+        return { booking };
+      },
+      () => {
+        // Check if number of bookings is less than 15
+        this.validateDate();
+      }
+    );
+  };
 
   handleGdprChange = (event: any) => {
     // Toggle button
@@ -194,16 +218,16 @@ class Booking extends React.Component<IProps, State> {
         }
         if (object.length < 15 && this.state.gdpr === true) {
           this.state.data.createData(create_booking).then((result: any) => {
-            this.setState({bookingId: result.data.message});
-            // this.props.bookingId(this.state.bookingId);
-            // console.log(this.props.bookingId);
+            console.log(result);
+            this.setState({ bookingId: result.data.message });
+            console.log(this.state.bookingId);
           });
           console.log(this.state.data);
         } else {
           console.log("error");
         }
-        
-        return <Redirect to="/confirmation" />
+
+        return <Redirect to="/confirmation" />;
       });
     }
   }
@@ -261,12 +285,12 @@ class Booking extends React.Component<IProps, State> {
   };
 
   render() {
-    console.log(this.state.booking.date);
+    console.log(this.state.bookingId);
+
     return (
       <>
         <main className="booking">
           <Navbar />
-          <Confirmation bookingId={this.state.bookingId}/>
           <div className="wrapper">
             <div className="container">
               <div className="guests">
@@ -290,7 +314,7 @@ class Booking extends React.Component<IProps, State> {
                 <select
                   name="time"
                   value={this.state.booking.time}
-                  onChange={this.handleInputChange}
+                  onChange={this.handleTimeChange}
                 >
                   <option value="0" disabled selected>
                     TID
@@ -308,7 +332,7 @@ class Booking extends React.Component<IProps, State> {
               </div>
 
               <div className="contacts">
-                {this.state.isShown ? (<p>Finns bordet</p>) : null}
+                {this.state.isShown ? <p>Finns bordet</p> : null}
                 <h3>KONTAKTUPPGIFTER</h3>
                 <form>
                   <label>
