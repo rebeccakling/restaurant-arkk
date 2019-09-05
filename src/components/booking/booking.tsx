@@ -19,11 +19,10 @@ interface State {
   nameError: string;
   emailError: string;
   phone_numberError: string;
-  gdprError: string;
   isShown: boolean;
   isDisable: boolean;
   bookingId: any;
-  isFullyBooked: boolean;
+  isAvaiable: string;
 }
 
 interface IProps {
@@ -50,11 +49,10 @@ class Booking extends React.Component<IProps, State> {
       nameError: "",
       emailError: "",
       phone_numberError: "",
-      gdprError: "",
       isShown: false,
       isDisable: true,
       bookingId: "0",
-      isFullyBooked: true
+      isAvaiable: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -71,13 +69,29 @@ class Booking extends React.Component<IProps, State> {
     ) {
       alert("välj tid och gäster");
     } else {
-      // Clear state
-      this.setState({ isShown: false });
+      // // Clear state
+      // this.setState({ isShown: false });
 
       this.setState({ date });
       this.setDate(date);
       this.validateDate();
     }
+  };
+
+  handleTimeChange = (event: any) => {
+    console.log(event.target.value);
+    this.setState(
+      {
+        booking: {
+          ...this.state.booking,
+          time: event.target.value
+        }
+      },
+      () => {
+        // Check if number of bookings is less than 15
+        this.validateDate();
+      }
+    );
   };
 
   setDate(date: any) {
@@ -100,7 +114,6 @@ class Booking extends React.Component<IProps, State> {
         } else {
           this.setState({ bookings: [] });
         }
-
         this.isTableAvaiable();
       }
     });
@@ -122,9 +135,12 @@ class Booking extends React.Component<IProps, State> {
     if (object.length < 1) {
       // Change isShown state to true to display input field
       this.setState({ isShown: true });
+      this.setState({ isAvaiable: "Finns bordet" });
+
       // alert("tid finns");
     } else {
       this.setState({ isShown: false });
+      this.setState({ isAvaiable: "Finns inget bord" });
     }
   };
 
@@ -142,24 +158,6 @@ class Booking extends React.Component<IProps, State> {
 
     this.setDate(this.state.date);
   }
-
-  handleTimeChange = (event: any) => {
-    const target = event.target;
-    const value = target.value;
-    const newName = target.name;
-
-    this.setState(
-      prevState => {
-        let booking = Object.assign({}, prevState.booking);
-        booking[newName] = value;
-        return { booking };
-      },
-      () => {
-        // Check if number of bookings is less than 15
-        this.validateDate();
-      }
-    );
-  };
 
   handleGdprChange = (event: any) => {
     // Toggle button
@@ -181,7 +179,6 @@ class Booking extends React.Component<IProps, State> {
         nameError: "",
         emailError: "",
         phone_numberError: "",
-        gdprError: "",
         isDisable: false
       });
 
@@ -243,7 +240,6 @@ class Booking extends React.Component<IProps, State> {
     let nameErrorToUpdate = "";
     let emailErrorToUpdate = "";
     let phone_numberErrorToUpdate = "";
-    let gdprErrorToUpdate = "";
 
     // Name validation
     if (!this.state.booking.name.match(nameValidationPattern)) {
@@ -260,23 +256,12 @@ class Booking extends React.Component<IProps, State> {
       phone_numberErrorToUpdate = "Phone number måste.....";
     }
 
-    // GDPR validation
-    if (!this.state.gdpr === true) {
-      gdprErrorToUpdate = "GDPR måste";
-    }
-
     // Update states
-    if (
-      nameErrorToUpdate ||
-      emailErrorToUpdate ||
-      phone_numberErrorToUpdate ||
-      gdprErrorToUpdate
-    ) {
+    if (nameErrorToUpdate || emailErrorToUpdate || phone_numberErrorToUpdate) {
       this.setState({
         nameError: nameErrorToUpdate,
         emailError: emailErrorToUpdate,
-        phone_numberError: phone_numberErrorToUpdate,
-        gdprError: gdprErrorToUpdate
+        phone_numberError: phone_numberErrorToUpdate
       });
       return false;
     }
@@ -329,81 +314,83 @@ class Booking extends React.Component<IProps, State> {
                   onChange={this.handleDateChange}
                   value={this.state.date}
                 />
+                <p>{this.state.isAvaiable}</p>
               </div>
 
-              <div className="contacts">
-                {this.state.isShown ? <p>Finns bordet</p> : null}
-                <h3>KONTAKTUPPGIFTER</h3>
-                <form>
-                  <label>
-                    NAMN:
+              {this.state.isShown ? (
+                <div className="contacts">
+                  <h3>KONTAKTUPPGIFTER</h3>
+                  <form>
+                    <label>
+                      NAMN:
+                      <br />
+                      <span className="error-message">
+                        {this.state.nameError}
+                      </span>
+                      <input
+                        type="text"
+                        name="name"
+                        value={this.state.booking.name}
+                        onChange={this.handleInputChange}
+                        placeholder="ex Rebecca"
+                      />
+                    </label>
                     <br />
-                    <span className="error-message">
-                      {this.state.nameError}
-                    </span>
-                    <input
-                      type="text"
-                      name="name"
-                      value={this.state.booking.name}
-                      onChange={this.handleInputChange}
-                    />
-                  </label>
-                  <br />
-                  <label>
-                    E-POSTADRESS:
+                    <label>
+                      E-POSTADRESS:
+                      <br />
+                      <span className="error-message">
+                        {this.state.emailError}
+                      </span>
+                      <input
+                        type="email"
+                        name="email"
+                        value={this.state.booking.email}
+                        onChange={this.handleInputChange}
+                        placeholder="ex rebecca@medieinstitutet.se"
+                      />
+                    </label>
                     <br />
-                    <span className="error-message">
-                      {this.state.emailError}
-                    </span>
-                    <input
-                      type="email"
-                      name="email"
-                      value={this.state.booking.email}
-                      onChange={this.handleInputChange}
-                    />
-                  </label>
-                  <br />
-                  <label>
-                    MOBILTELEFON:
+                    <label>
+                      MOBILTELEFON:
+                      <br />
+                      <span className="error-message">
+                        {this.state.phone_numberError}
+                      </span>
+                      <input
+                        type="text"
+                        name="phone_number"
+                        value={this.state.booking.phone_number}
+                        onChange={this.handleInputChange}
+                        placeholder="ex 0701234567"
+                      />
+                    </label>
                     <br />
-                    <span className="error-message">
-                      {this.state.phone_numberError}
-                    </span>
-                    <input
-                      type="text"
-                      name="phone_number"
-                      value={this.state.booking.phone_number}
-                      onChange={this.handleInputChange}
-                    />
-                  </label>
-                  <br />
-                  <label>
-                    GDPR: <br />
-                    <span className="error-message">
-                      {this.state.gdprError}
-                    </span>
-                    <input
-                      className="gdprCheckbox"
-                      name="gdpr"
-                      type="checkbox"
-                      checked={this.state.booking.gdpr}
-                      onChange={this.handleGdprChange}
-                    />
-                  </label>
-                  <br />
-                  <button
-                    onClick={this.completeBooking}
-                    disabled={
-                      this.state.isDisable ||
-                      !this.state.booking.name.length ||
-                      !this.state.booking.email.length ||
-                      !this.state.booking.phone_number
-                    }
-                  >
-                    BOKA
-                  </button>
-                </form>
-              </div>
+                    <label>
+                      GDPR: <br />
+                      <input
+                        className="gdprCheckbox"
+                        name="gdpr"
+                        type="checkbox"
+                        checked={this.state.booking.gdpr}
+                        onChange={this.handleGdprChange}
+                      />
+                    </label>
+                    <br />
+                    <button
+                      onClick={this.completeBooking}
+                      disabled={
+                        this.state.isDisable ||
+                        !this.state.booking.name.length ||
+                        !this.state.booking.email.length ||
+                        !this.state.booking.phone_number
+                      }
+                    >
+                      BOKA
+                    </button>
+                  </form>
+                </div>
+              ) : null}
             </div>
           </div>
         </main>
