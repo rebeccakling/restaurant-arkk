@@ -110,7 +110,8 @@ class Booking extends React.Component<IProps, State> {
     // Check if chosen date is later than today
     this.state.data.readData().then((result: any) => {
       if (this.state.booking.date < moment().format("YYYY-MM-DD")) {
-        alert("Boka senare än idag");
+        alert("Datum har varit.");
+        this.setState({ isShown: false });
       } else {
         if (result) {
           this.setState({ bookings: result.data.bookings });
@@ -121,7 +122,7 @@ class Booking extends React.Component<IProps, State> {
           // Hide contact div and show a message
           this.setState({ isShown: false });
           this.setState({
-            isAvaiable: "Ingen booking eller database connection problem"
+            isAvaiable: "Ingen booking eller database connection problem."
           });
         }
       }
@@ -141,15 +142,15 @@ class Booking extends React.Component<IProps, State> {
         object.push(element);
       }
     }
-    if (object.length < 1) {
+    if (object.length < 3) {
       // Change isShown state to true to display input field
       this.setState({ isShown: true });
-      this.setState({ isAvaiable: "Finns bordet" });
 
       // alert("tid finns");
     } else {
       this.setState({ isShown: false });
-      this.setState({ isAvaiable: "Finns inget bord" });
+      this.setState({ isAvaiable: "Fullbokat, vänligen kolla annan tid eller datum." });
+      this.setState({ isDisable: true })
     }
   };
 
@@ -253,17 +254,17 @@ class Booking extends React.Component<IProps, State> {
 
     // Name validation
     if (!this.state.booking.name.match(nameValidationPattern)) {
-      nameErrorToUpdate = "Name måste.....";
+      nameErrorToUpdate = "Du måste ange ditt namn.";
     }
 
     // Email validation
     if (!this.state.booking.email.match(emailValidationPattern)) {
-      emailErrorToUpdate = "Email måste.....";
+      emailErrorToUpdate = "E-mailadressen du angav verkar vara felaktig.";
     }
 
     // Phone_number validation
     if (!this.state.booking.phone_number.match(phone_numberValidationPattern)) {
-      phone_numberErrorToUpdate = "Phone number måste.....";
+      phone_numberErrorToUpdate = "Du måste ange ditt telefonnummer.";
     }
 
     // Update states
@@ -285,6 +286,7 @@ class Booking extends React.Component<IProps, State> {
     return (
       <>
         <main className="booking">
+        <div className="heroImageBooking"></div>
           <Navbar />
           <div className="wrapper">
             <div className="container">
@@ -324,7 +326,7 @@ class Booking extends React.Component<IProps, State> {
                   onChange={this.handleDateChange}
                   value={this.state.date}
                 />
-                <p>{this.state.isAvaiable}</p>
+                <p className="error-message">{this.state.isAvaiable}</p>
               </div>
 
               {this.state.isShown ? (
@@ -342,7 +344,7 @@ class Booking extends React.Component<IProps, State> {
                         name="name"
                         value={this.state.booking.name}
                         onChange={this.handleInputChange}
-                        placeholder="ex Rebecca"
+                        placeholder="Namn"
                       />
                     </label>
                     <br />
@@ -357,7 +359,7 @@ class Booking extends React.Component<IProps, State> {
                         name="email"
                         value={this.state.booking.email}
                         onChange={this.handleInputChange}
-                        placeholder="ex rebecca@medieinstitutet.se"
+                        placeholder="arkk@arkk.se"
                       />
                     </label>
                     <br />
@@ -372,7 +374,7 @@ class Booking extends React.Component<IProps, State> {
                         name="phone_number"
                         value={this.state.booking.phone_number}
                         onChange={this.handleInputChange}
-                        placeholder="ex 0701234567"
+                        placeholder="+4676XXXXXXX"
                       />
                     </label>
                     <br />
