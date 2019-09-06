@@ -42,8 +42,8 @@ class Data {
       });
   }
 
-  deleteData(deleteData: any) {
-    axios
+  deleteData(deleteData: any): Promise<IBooking> {
+    return axios
       .post("http://localhost:8888/crud/delete.php", deleteData, {
         headers: { "Content-Type": "text/plain" }
       })
