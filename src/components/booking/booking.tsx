@@ -103,6 +103,10 @@ class Booking extends React.Component<IProps, State> {
   }
 
   validateDate() {
+    // Clear message
+    this.setState({
+      isAvaiable: ""
+    });
     // Check if chosen date is later than today
     this.state.data.readData().then((result: any) => {
       if (this.state.booking.date < moment().format("YYYY-MM-DD")) {
@@ -110,11 +114,16 @@ class Booking extends React.Component<IProps, State> {
       } else {
         if (result) {
           this.setState({ bookings: result.data.bookings });
-          // If there is NOT, set empty array instead
+          this.isTableAvaiable();
         } else {
+          // If result is empty or error, set empty array instead
           this.setState({ bookings: [] });
+          // Hide contact div and show a message
+          this.setState({ isShown: false });
+          this.setState({
+            isAvaiable: "Ingen booking eller database connection problem"
+          });
         }
-        this.isTableAvaiable();
       }
     });
   }
@@ -195,7 +204,7 @@ class Booking extends React.Component<IProps, State> {
         if (result) {
           this.setState({ bookings: result.data.bookings });
 
-          // If there is NOT, set empty array instead
+          // If result is empty or error, set empty array instead
         } else {
           this.setState({ bookings: [] });
         }
@@ -218,6 +227,7 @@ class Booking extends React.Component<IProps, State> {
             console.log(result);
             this.setState({ bookingId: result.data.message });
             console.log(this.state.bookingId);
+            window.alert("Tack! Ditt bookings id är " + this.state.bookingId);
           });
           console.log(this.state.data);
         } else {
