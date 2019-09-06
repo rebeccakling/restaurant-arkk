@@ -23,6 +23,7 @@ interface State {
   isDisable: boolean;
   bookingId: any;
   isAvaiable: string;
+  showConfirmation: boolean;
 }
 
 interface IProps {
@@ -52,7 +53,8 @@ class Booking extends React.Component<IProps, State> {
       isShown: false,
       isDisable: true,
       bookingId: "0",
-      isAvaiable: ""
+      isAvaiable: "",
+      showConfirmation: false
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -228,14 +230,16 @@ class Booking extends React.Component<IProps, State> {
             console.log(result);
             this.setState({ bookingId: result.data.message });
             console.log(this.state.bookingId);
+            this.setState({
+              showConfirmation: true
+            });
+
             window.alert("Tack! Ditt bookings id är " + this.state.bookingId);
           });
           console.log(this.state.data);
         } else {
           console.log("error");
         }
-
-        return <Redirect to="/confirmation" />;
       });
     }
   }
@@ -281,7 +285,13 @@ class Booking extends React.Component<IProps, State> {
   };
 
   render() {
-    console.log(this.state.bookingId);
+    // console.log(this.state.bookingId);
+
+  const hej = this.state.bookingId;
+
+    if(this.state.showConfirmation) {
+      return <Redirect to={`/confirmation?id=${this.state.bookingId}`} />;
+    }
 
     return (
       <>
