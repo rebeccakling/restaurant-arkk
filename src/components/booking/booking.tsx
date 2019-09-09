@@ -326,6 +326,7 @@ class Booking extends React.Component<IProps, State> {
           <div className="heroImageBooking"></div>
           <Navbar />
           <div className="wrapper">
+            <h1>Boka bord här</h1>
             <div className="container">
               <div className="guests">
                 <select
