@@ -3,17 +3,24 @@
 
 
 .home {
-
     .hero-container {
         grid-row: 1 / 2;
-        background-image: linear-gradient(180deg, rgba(31, 32, 65, 0) 50%, black 100%), url(../../assets/images/ARKK-logo.png);
+        background-image:  url(../../assets/images/arkk-heroimage.jpg);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         height: 400px;
+        position: relative;
+        text-align: center;
+
+        .arkk-logo {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
     }
-
 
     .container {
         width: 100vw;
@@ -28,36 +35,98 @@
 
 
         .intro-container {
-            grid-row: 3 / 4;
             display: grid;
-            grid-template-rows: 0.1fr 0.1fr;
-            grid-template-columns: $x6grid;
+            grid-template-columns: 1fr;
+            grid-template-areas: "presentation"
+            "gallery-container"
+            "sprit-bord";
+
+            .presentation {
+                grid-area: presentation;
+                padding: 1em;
+            }
 
 
-            h2 {
-                padding: 5% 0;
+            .gallery-container{
+                grid-area: gallery-container;
+                padding: 1em;
+        
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .sprit-bord {
+                grid-area: sprit-bord;
+                padding: 1em;
+            }
+
+            h1 {
                 grid-row: 1 / 2;
                 grid-column: span 7;
                 text-align: center;
                 color: $fontHeadingTitleColor;
                 font-family: $fontHeadingTitle;
-
+                font-size: 25px;
+                margin-top: 2.5em;
+                margin-top: 2.5em;
             }
 
             p {
-                padding-bottom: 5%;
+                padding-bottom: 30px;;
                 font-family: $fontBody;
                 font-style: normal;
-                font-weight: 500;
-                font-size: 1rem;
+                font-weight: 500;              
                 line-height: 30px;
                 text-align: center;
-                grid-column: 2 / 6;
                 color: $fontColorMain;
-
+                font-size: $fontBodySize;
+                grid-column: 2 / 4;
+               
             }
+
+            h3 {
+                text-align: center;
+                padding-bottom: 20px;
+            }
+
         }
     }
 
 
+}
+
+@include tablet {
+    .home{
+        .container{
+            .intro-container {
+                h1 {
+                    font-size: 30px;
+                }
+                p {
+                    font-size: 20px;
+                    padding-left: 40px;
+                    padding-right: 40px;
+                }
+                .gallery-container {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-areas: "gallery-one gallery-two";
+
+                    .gallery {
+                        .gallery-one{
+                            grid-area: gallery-one;
+                        }
+    
+                        .gallery-two{
+                            grid-area: gallery-two;
+                        }
+
+                      
+                    }
+                }
+            }
+        }
+    }
 }

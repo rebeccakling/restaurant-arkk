@@ -32,7 +32,6 @@
 
                 h1 {
                     color: $primaryColor;
-                    text-shadow: $textShadow;
                     font-family: $fontHeadingTitle;
                     font-size: 25px;
                     text-align: center;
@@ -117,6 +116,7 @@
                         border-bottom: 1px solid gray;
                         padding-bottom: 40px;
                         padding-top: 60px;
+                           font-size: 20px;
                     }
                 }
             }
