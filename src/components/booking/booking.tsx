@@ -9,6 +9,7 @@ import { FaThemeisle } from "react-icons/fa";
 import { throwStatement } from "@babel/types";
 import Confirmation from "../confirmation/confirmation";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 interface State {
   data: Data;
@@ -151,8 +152,10 @@ class Booking extends React.Component<IProps, State> {
       // alert("tid finns");
     } else {
       this.setState({ isShown: false });
-      this.setState({ isAvaiable: "Fullbokat, vänligen kolla annan tid eller datum." });
-      this.setState({ isDisable: true })
+      this.setState({
+        isAvaiable: "Fullbokat, vänligen kolla annan tid eller datum."
+      });
+      this.setState({ isDisable: true });
     }
   };
 
@@ -234,7 +237,31 @@ class Booking extends React.Component<IProps, State> {
               showConfirmation: true
             });
 
-            window.alert("Tack! Ditt bookings id är " + this.state.bookingId);
+            // window.alert("Tack! Ditt bookings id är " + this.state.bookingId);
+
+            //Send a notification email of the new booking
+            axios
+              .post(
+                "http://localhost:3001/send",
+                {
+                  name: this.state.booking.name,
+                  email: this.state.booking.email,
+                  date: this.state.booking.date,
+                  time: this.state.booking.time,
+                  bookingId: this.state.bookingId,
+                  subject: "Thanks for booking with ARKK",
+                  openingMessage:
+                    "Tack för att du bokat med oss restaurant-arkk!",
+                  closingMessage: "Välkomen!"
+                }
+                // { headers: { Accept: "application/json" } }
+              )
+              .then(function(response) {
+                console.log(response);
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
           });
           console.log(this.state.data);
         } else {
@@ -287,18 +314,19 @@ class Booking extends React.Component<IProps, State> {
   render() {
     // console.log(this.state.bookingId);
 
-  const hej = this.state.bookingId;
+    const hej = this.state.bookingId;
 
-    if(this.state.showConfirmation) {
+    if (this.state.showConfirmation) {
       return <Redirect to={`/confirmation?id=${this.state.bookingId}`} />;
     }
 
     return (
       <>
         <main className="booking">
-        <div className="heroImageBooking"></div>
+          <div className="heroImageBooking"></div>
           <Navbar />
           <div className="wrapper">
+            <h1>Boka bord här</h1>
             <div className="container">
               <div className="guests">
                 <select

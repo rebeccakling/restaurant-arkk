@@ -8,6 +8,7 @@ import {
   FaChevronCircleUp,
   FaChevronCircleDown
 } from "react-icons/fa";
+import axios from "axios";
 
 interface IAdminState {
   bookings: IBooking[];
@@ -98,18 +99,45 @@ class Admin extends Component<{}, IAdminState> {
     let okToRemove = window.confirm("Are you sure?");
 
     if (okToRemove) {
-      // Create parameter for delete method
-      let delete_booking = {
-        booking_id: booking_id
-      };
-
-      // Instantiate for api connection and run delete method
-      let data = new Data();
-      data.deleteData(delete_booking).then(() => {
-        // Read updated database
-        this.getBooking();
-      });
+      //Find the details of a selected booking and send a notification email of cancellation
+      let bookingToDelete: any = this.state.bookings.find(
+        booking => booking.booking_id === booking_id
+      );
+      axios
+        .post(
+          "http://localhost:3001/send",
+          {
+            name: bookingToDelete.name,
+            email: bookingToDelete.email,
+            date: bookingToDelete.date,
+            time: bookingToDelete.time,
+            bookingId: bookingToDelete.booking_id,
+            subject: "Your booking has been cancelled",
+            openingMessage: "We have cancelled the following booking.",
+            closingMessage: "Tack!"
+          }
+          // { headers: { Accept: "application/json" } }
+        )
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
+
+    // Create parameter for delete method
+    // Instantiate for api connection
+    let delete_booking = {
+      booking_id: booking_id
+    };
+
+    let data = new Data();
+    // Run delete method
+    data.deleteData(delete_booking).then(() => {
+      // Read updated database
+      this.getBooking();
+    });
   };
 
   render() {
