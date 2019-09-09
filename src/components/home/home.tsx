@@ -8,11 +8,8 @@ export default class Home extends Component {
     return (
       <>
         <main className="home">
-          <div className="hero-container">
-            <img
-              className="arkk-logo"
-              src={require("./../../assets/images/ARKK-logo.png")}
-            />
+          <div className="hero-container" >
+            <img className="arkk-logo" src={require("./../../assets/images/ARKK-logo.png")} />
           </div>
           <Navbar />
           <div className="container">

@@ -1,165 +1,140 @@
 @import "../../sass/style.scss";
 
 .footer {
+    width: 100%;
     background-color: black;
     display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    color: $fontHeadingTitleColor;
+    justify-content: center;
 
-.box1 {
-    text-align: center;
-    margin: 20px 0;
+    .info {
+        color: $fontHeadingTitleColor;
+        margin: 15px 0;
 
-    h2 {
-        margin-bottom: 10px;
-        font-size: $fontBodySize;
-    }
+        .box1 {
+            margin: 15px 0;
 
-    p {
-        color: #fff;
-    }
+            h2 {
+                font-size: $fontBodySize;
+                margin: 10px 0;
+            }
 
-    hr {
-        margin-top: 10px; 
-    }
-}
+            p {
+                color: #fff;
+            }
 
-.box2 {
-    margin: 20px 0;
-    text-align: center;
-
-    h2 {
-        margin-bottom: 10px;
-        font-size: $fontBodySize;
-    }
-
-    p {
-        color: #fff;
-    }
-
-    address {
-        color: #fff;
-    }   
-    
-    hr {
-        margin-top: 10px; 
-    }
-}
-
-.box3 {
-    margin: 20px 0;
-    text-align: center;
-
-    h2 {
-        margin-bottom: 10px;
-        font-size: $fontBodySize;
-    }
-
-    p {
-        color: #fff;
-    }
-
-    address {
-        color: #fff;
-    
-        &:hover {
-            color: $hoverColor;
+            hr {
+                margin-top: 10px;
+            }
         }
-    }   
-    
-    hr {
-        margin-top: 10px; 
-    }
-}
 
-.box4{
-    margin: 20px 0;
-    text-align: center;
+        .box2 {
+            margin: 15px 0;
 
-    h2 {
-        margin-bottom: 10px;
-        font-size: $fontBodySize;
-    }
+            h2 {
+                font-size: $fontBodySize;
+                margin: 10px 0;
+            }
 
-    p {
-        color: #fff;
-        
-    &:hover {
-        color: $hoverColor;
-    }
-    }
+            address {
+                color: #fff;
+            }
 
-    hr {
-        margin-top: 10px; 
-    }
-}
+            hr {
+                margin-top: 10px;
+            }
+        }
 
-.box5 {
-    color: $subColor;
-    font-size: 10px;
-    margin-bottom: 60px; 
-    margin-top: 50px;   
-}
+        .box3 {
+            margin: 15px 0;
+
+            h2 {
+                font-size: $fontBodySize;
+                margin: 10px 0;
+            }
+
+
+            address {
+                color: #fff;
+
+                &:hover {
+                    color: $hoverColor;
+                }
+            }
+
+            hr {
+                margin-top: 10px;
+            }
+        }
+
+        .box4 {
+            margin: 15px 0;
+
+            h2 {
+                font-size: $fontBodySize;
+                margin: 10px 0;
+            }
+
+            address {
+                color: #fff;
+
+                &:hover {
+                    color: $hoverColor;
+                }
+            }
+
+            hr {
+                margin-top: 10px;
+            }
+        }
+
+        .box5 {
+            margin-top: 20px;
+            text-align: center;
+            color: $subColor;
+            font-size: 10px;
+        }
+    }
 }
 
 @include tablet {
 
     .footer {
-        height: 300px;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        justify-items: center;
-        align-items: center; 
-        grid-template-rows: 1fr 0.2fr;  
-    
-    .box1 {
-        text-align: left;
-        margin: 30px 0;
-        
-        h2 {
-            margin-bottom: 15px;
-        }
-    }
-    .box2 {
-        margin: 30px 0;
-        text-align: left;  
 
-        h2 {
-            margin-bottom: 15px;
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: "box1 box2 box3 box4"
+                "box5 box5 box5 box5";
+            padding: 30px 0;
+            justify-content: space-between;
+
+            .box1 {
+                grid-area: box1;
+                margin: 15px;
+            }
+
+            .box2 {
+                grid-area: box2;
+                margin: 15px;
+            }
+
+            .box3 {
+                grid-area: box3;
+                margin: 15px;
+            }
+
+            .box4 {
+                grid-area: box4;
+                margin: 15px;
+            }
+
+            .box5 {
+                grid-area: box5;
+                font-size: 15px;
+            }
         }
-    }
-    .box3 {
-        margin: 30px 0;
-        text-align: left;
-    
-        h2 {
-            margin-bottom: 15px;
-        }    
-    }
-    .box4 {
-        margin: 30px 0;
-        text-align: left;
-    
-        h4 {
-            margin-bottom: 15px;
-        }
-    }
-    .box5 {
-        font-size: 15px;
-        grid-row: 2 / 3;
-        grid-column: span 7;
     }
 }
-} 
 
-@include desktop {
-
-    .footer {
-       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-       grid-column: 2 / 6;
-       
-       .box1 {
-           grid-column: 2 / 3;
-       }
-    }
-}
+@include desktop {}

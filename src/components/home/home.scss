@@ -4,7 +4,6 @@
 
 .home {
     .hero-container {
-        grid-row: 1 / 2;
         background-image: url(../../assets/images/arkk-heroimage.jpg);
         background-position: center;
         background-repeat: no-repeat;
@@ -19,7 +18,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-
     }
 
     .container {
@@ -28,10 +26,6 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-
-        Navbar {
-            grid-row: 2 / 3;
-        }
 
 
         .intro-container {
@@ -48,23 +42,23 @@
 
 
             .gallery-container {
+                display: grid;
                 grid-area: gallery-container;
-                padding: 1em;
+                justify-self: center;
 
                 img {
                     width: 100%;
                     height: 100%;
+                    max-width: 320px;
                 }
             }
 
             .sprit-bord {
                 grid-area: sprit-bord;
-                padding: 1em;
+                padding: 3rem 1rem;
             }
 
             h1 {
-                grid-row: 1 / 2;
-                grid-column: span 7;
                 text-align: center;
                 color: $fontHeadingTitleColor;
                 font-family: $fontHeadingTitle;
@@ -75,7 +69,6 @@
 
             p {
                 padding-bottom: 30px;
-                ;
                 font-family: $fontBody;
                 font-style: normal;
                 font-weight: 500;
@@ -83,7 +76,6 @@
                 text-align: center;
                 color: $fontColorMain;
                 font-size: $fontBodySize;
-                grid-column: 2 / 4;
 
             }
 
@@ -117,15 +109,17 @@
                     grid-template-columns: 1fr 1fr;
                     grid-template-areas: "gallery-one gallery-two";
 
-                    .gallery {
-                        .gallery-one {
-                            grid-area: gallery-one;
-                        }
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
 
-                        .gallery-two {
-                            grid-area: gallery-two;
-                        }
+                    .gallery-one {
+                        grid-area: gallery-one;
+                    }
 
+                    .gallery-two {
+                        grid-area: gallery-two;
 
                     }
                 }
