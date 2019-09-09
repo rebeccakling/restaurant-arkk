@@ -6,11 +6,11 @@ export default class Footer extends Component {
   render() {
     return (
       <footer className="footer" role="footerInfo">
-
-        <div className="box1">
+      <div className="info">
+      <div className="box1">
           <h2>ÖPPETTIDER</h2>
-          <p>Mon-Thu: <time>18.:00 - 23:00</time></p>
-          <p>Wed-Sun: <time>18:00 - 00:00</time></p>
+          <p>Mån-Tors: <time>18.:00 - 23:00</time></p>
+          <p>Fre-Sön: <time>18:00 - 00:00</time></p>
           <hr />
         </div>
         <div className="box2">
@@ -27,14 +27,14 @@ export default class Footer extends Component {
         </div>
         <div className="box4">
           <h2>FÖLJ OSS</h2>
-          <p><a href="facebook.com">Facebook</a></p>
-          <p><a href="instagram.com">Instagram</a></p>
+          <address><a href="facebook.com">Facebook</a></address>
+          <address><a href="instagram.com">Instagram</a></address>
           <hr />
         </div>
         <div className="box5">
           <p>&copy;ARKK 2019</p>
         </div>
-
+      </div>
       </footer>
     );
   }

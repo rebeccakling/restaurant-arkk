@@ -10,7 +10,7 @@ export default class Home extends Component {
       <>
         <main className="home">
           <div className="hero-container" >
-            <img className="arkk-logo" src={require("./../../assets/images/arkk-logo.png")} />
+            <img className="arkk-logo" src={require("./../../assets/images/ARKK-logo.png")} />
           </div>
           <Navbar />
           <div className="container">
