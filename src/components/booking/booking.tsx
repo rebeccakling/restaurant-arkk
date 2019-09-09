@@ -233,9 +233,7 @@ class Booking extends React.Component<IProps, State> {
             console.log(result);
             this.setState({ bookingId: result.data.message });
             console.log(this.state.bookingId);
-            this.setState({
-              showConfirmation: true
-            });
+            this.setState({showConfirmation: true });
 
             // window.alert("Tack! Ditt bookings id är " + this.state.bookingId);
 
@@ -312,12 +310,9 @@ class Booking extends React.Component<IProps, State> {
   };
 
   render() {
-    // console.log(this.state.bookingId);
 
-    const hej = this.state.bookingId;
-
-    if (this.state.showConfirmation) {
-      return <Redirect to={`/confirmation?id=${this.state.bookingId}`} />;
+    if(this.state.showConfirmation) {
+      return <Redirect to={`/confirmation?bookingId=${this.state.bookingId}`} />;
     }
 
     return (
