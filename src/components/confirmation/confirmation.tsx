@@ -33,8 +33,6 @@ class Confirmation extends Component <IConfirmationProps, IConfirmationState> {
         date: moment().format("YYYY-MM-DD"),
         time: "0",
         name: "",
-        email: "",
-        phone_number: ""
       },
       bookings : [],
     };
@@ -77,11 +75,11 @@ class Confirmation extends Component <IConfirmationProps, IConfirmationState> {
           <Navbar />
           <div className="container">
             <h1>Tack {this.state.booking.name} din bokning är nu genomförd!</h1>
-            <p>Ni är välkommna till oss den {this.state.booking.date} kl: {this.state.booking.time}</p>
+            <p>Ni har bokat bord för {this.state.booking.number_of_guests} personer och är välkommna till oss den {this.state.booking.date} kl: {this.state.booking.time}</p>
             <h2>Vid avbokning eller ändring av bokning vänligen kontakta oss och ange ditt bokningsnr: {this.state.bookingId}</h2>
           </div>
-          <Footer />
         </main>
+        <Footer />
       </>
     )
   }
