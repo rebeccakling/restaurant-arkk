@@ -105,15 +105,15 @@ class Admin extends Component<{}, IAdminState> {
 
       // Instantiate for api connection and run delete method
       let data = new Data();
-      data.deleteData(delete_booking);
-
-      // Read updated database
-      this.getBooking();
+      data.deleteData(delete_booking).then(() => {
+        // Read updated database
+        this.getBooking();
+      });
     }
   };
 
   render() {
-    const hasBooking = this.state.bookings.length > 0;
+    const hasBooking = this.state.bookings;
     return (
       <main className="admin">
         <div className="container">
@@ -129,32 +129,32 @@ class Admin extends Component<{}, IAdminState> {
                   <thead>
                     <tr>
                       {/* Table header */}
-                      <th className="list-header">ID</th>
-                      <th className="list-header">Datum</th>
-                      <th className="list-header">Tid</th>
-                      <th className="list-header">Namn</th>
-                      <th className="list-header">E-post</th>
-                      <th className="list-header">Antal</th>
-                      <th className="list-header">Ta bort</th>
+                      <th>ID</th>
+                      <th>Datum</th>
+                      <th>Tid</th>
+                      <th>Namn</th>
+                      <th>E-post</th>
+                      <th>Antal</th>
+                      <th>Ta bort</th>
                     </tr>
                   </thead>
                   {/* Table body */}
                   <tbody>
                     {this.state.bookings.map(bookings => (
                       <tr key={bookings.booking_id}>
-                        <td className="list-header">{bookings.booking_id}</td>
-                        <td className="list-header">{bookings.date}</td>
-                        <td className="list-data">{bookings.time}</td>
-                        <td className="list-data">{bookings.name}</td>
-                        <td className="list-data">{bookings.email}</td>
+                        <td>{bookings.booking_id}</td>
+                        <td>{bookings.date}</td>
+                        <td>{bookings.time}</td>
+                        <td>{bookings.name}</td>
+                        <td>{bookings.email}</td>
                         <td className="list-center">
                           <FaChevronCircleDown
-                            className="react-icon admin-icon"
+                            className="react-icon admin-icon decrement"
                             onClick={() => this.decrement(bookings.booking_id)}
                           />
                           {bookings.number_of_guests}
                           <FaChevronCircleUp
-                            className="react-icon admin-icon"
+                            className="react-icon admin-icon increment"
                             onClick={() => this.increment(bookings.booking_id)}
                           />
 
