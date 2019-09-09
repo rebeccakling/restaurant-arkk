@@ -5,10 +5,12 @@ import Footer from "../footer/footer";
 import { RouteComponentProps } from "react-router-dom";
 import IBooking from "../../interfaces/ibooking";
 import Data from "../../service/data";
+import moment from "moment";
 
 
 interface IConfirmationState{
   bookingId: any;
+  booking: any;
   bookings: IBooking[];
 }
 
@@ -26,6 +28,14 @@ class Confirmation extends Component <IConfirmationProps, IConfirmationState> {
     
     this.state = {
       bookingId : bookingId,
+      booking: {
+        number_of_guests: "0",
+        date: moment().format("YYYY-MM-DD"),
+        time: "0",
+        name: "",
+        email: "",
+        phone_number: ""
+      },
       bookings : [],
     };
     
@@ -33,7 +43,6 @@ class Confirmation extends Component <IConfirmationProps, IConfirmationState> {
 
   componentDidMount() {
     this.getBooking();
-    console.log(this.state.bookings)
   }
 
   // Fetch bookings from database
@@ -44,11 +53,19 @@ class Confirmation extends Component <IConfirmationProps, IConfirmationState> {
       // If there is a result from database update setate with the result
       if (result) {
         this.setState({ bookings: result.data.bookings });
+        this.getLatestBooking();
         // If there is NOT, set empty array instead
       } else {
         this.setState({ bookings: [] });
       }
     });
+  }
+
+  getLatestBooking () {
+    let latestBooking = this.state.bookings.pop();
+    let bookings = this.setState({ booking: latestBooking})
+
+    return bookings
   }
   
   render() {
@@ -59,9 +76,9 @@ class Confirmation extends Component <IConfirmationProps, IConfirmationState> {
           <div className="hero-img"></div>
           <Navbar />
           <div className="container">
-            <h1>Din bokning är nu genomförd!</h1>
-
-            <p>Ni är välkommna till oss den {} </p>
+            <h1>Tack {this.state.booking.name} din bokning är nu genomförd!</h1>
+            <p>Ni är välkommna till oss den {this.state.booking.date} kl: {this.state.booking.time}</p>
+            <h2>Vid avbokning eller ändring av bokning vänligen kontakta oss och ange ditt bokningsnr: {this.state.bookingId}</h2>
           </div>
           <Footer />
         </main>
