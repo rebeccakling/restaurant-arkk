@@ -233,7 +233,7 @@ class Booking extends React.Component<IProps, State> {
             console.log(result);
             this.setState({ bookingId: result.data.message });
             console.log(this.state.bookingId);
-            this.setState({showConfirmation: true });
+            this.setState({ showConfirmation: true });
 
             // window.alert("Tack! Ditt bookings id är " + this.state.bookingId);
 
@@ -247,10 +247,9 @@ class Booking extends React.Component<IProps, State> {
                   date: this.state.booking.date,
                   time: this.state.booking.time,
                   bookingId: this.state.bookingId,
-                  subject: "Thanks for booking with ARKK",
-                  openingMessage:
-                    "Tack för att du bokat med oss restaurant-arkk!",
-                  closingMessage: "Välkomen!"
+                  subject: "Orderbekräftelse ARKK",
+                  openingMessage: "Tack för din bokning!",
+                  closingMessage: "Varmt Välkommen!"
                 }
                 // { headers: { Accept: "application/json" } }
               )
@@ -310,9 +309,10 @@ class Booking extends React.Component<IProps, State> {
   };
 
   render() {
-
-    if(this.state.showConfirmation) {
-      return <Redirect to={`/confirmation?bookingId=${this.state.bookingId}`} />;
+    if (this.state.showConfirmation) {
+      return (
+        <Redirect to={`/confirmation?bookingId=${this.state.bookingId}`} />
+      );
     }
 
     return (
