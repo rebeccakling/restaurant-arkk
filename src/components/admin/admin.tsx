@@ -112,8 +112,8 @@ class Admin extends Component<{}, IAdminState> {
             date: bookingToDelete.date,
             time: bookingToDelete.time,
             bookingId: bookingToDelete.booking_id,
-            subject: "Your booking has been cancelled",
-            openingMessage: "We have cancelled the following booking.",
+            subject: "Din bokning är nu avbokad.",
+            openingMessage: "Vi har avbokat denna bokning.",
             closingMessage: "Tack!"
           }
           // { headers: { Accept: "application/json" } }
@@ -141,7 +141,7 @@ class Admin extends Component<{}, IAdminState> {
   };
 
   render() {
-    const hasBooking = this.state.bookings;
+    const hasBooking = this.state.bookings.length;
     return (
       <main className="admin">
         <div className="container">
@@ -210,7 +210,8 @@ class Admin extends Component<{}, IAdminState> {
             ) : (
               // Show message instead of table if there is no booking
               <p>
-                There is no booking yet or you have database connection problem.
+                Du saknar antingen database uppkoppling eller så finns ingen
+                registrerade bokningar.
               </p>
             )}
           </div>
