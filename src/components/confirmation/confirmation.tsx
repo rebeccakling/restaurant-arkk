@@ -2,20 +2,10 @@ import React, { Component } from "react";
 import "./confirmation.scss";
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
-import { RouteComponentProps } from "react-router-dom";
-import IBooking from "../../interfaces/ibooking";
 import Data from "../../service/data";
 import moment from "moment";
+import {IConfirmationProps,IConfirmationState} from "./../../interfaces/iconfirmation"
 
-
-interface IConfirmationState{
-  bookingId: any;
-  booking: any;
-  bookings: IBooking[];
-}
-
-interface IConfirmationProps extends RouteComponentProps< {bookingId: string}>{
-}
 
 class Confirmation extends Component <IConfirmationProps, IConfirmationState> {
   constructor(props: IConfirmationProps) {

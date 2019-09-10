@@ -80,6 +80,10 @@
 
                 .aboutArkk {
                     grid-area: aboutArkk;
+
+                    p{
+                        font-size: $fontBodySizeTablet;
+                    }
                 }
 
                 .imageMarkChef {
@@ -107,4 +111,16 @@
 
 }
 
-@include desktop {}
+@include desktop {
+    .about{
+        .container{
+            .aboutUsInfo{
+                .aboutArkk{
+                    p{
+                        font-size: $fontBodySizeDesktop;
+                    }
+                }
+            }
+        }
+    }
+}
