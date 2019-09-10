@@ -99,7 +99,7 @@
                 }
 
                 p {
-                    font-size: 20px;
+                    font-size: $fontBodySizeTablet;
                     padding-left: 40px;
                     padding-right: 40px;
                 }
@@ -122,6 +122,24 @@
                         grid-area: gallery-two;
 
                     }
+                }
+            }
+        }
+    }
+}
+
+@include desktop {
+    .home {
+        .container {
+            .intro-container {
+                h1 {
+                    font-size: 30px;
+                }
+
+                p {
+                    font-size: $fontBodySizeDesktop;
+                    padding-left: 40px;
+                    padding-right: 40px;
                 }
             }
         }
