@@ -10,6 +10,7 @@ import { throwStatement } from "@babel/types";
 import Confirmation from "../confirmation/confirmation";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import NodeMailer from "../../service/data-nodemailer";
 
 interface State {
   data: Data;
@@ -59,6 +60,7 @@ class Booking extends React.Component<{}, State> {
     this.handleDateChange = this.handleDateChange.bind(this);
     this.setDate = this.setDate.bind(this);
     this.validateDate = this.validateDate.bind(this);
+    this.sendConfirmationMail = this.sendConfirmationMail.bind(this);
   }
 
   handleDateChange = (date: any) => {
@@ -68,9 +70,6 @@ class Booking extends React.Component<{}, State> {
     ) {
       alert("välj tid och gäster");
     } else {
-      // // Clear state
-      // this.setState({ isShown: false });
-
       this.setState({ date });
       this.setDate(date);
       this.validateDate();
@@ -78,7 +77,6 @@ class Booking extends React.Component<{}, State> {
   };
 
   handleTimeChange = (event: any) => {
-    console.log(event.target.value);
     this.setState(
       {
         booking: {
@@ -108,22 +106,14 @@ class Booking extends React.Component<{}, State> {
     });
     // Check if chosen date is later than today
     this.state.data.readData().then((result: any) => {
-      if (this.state.booking.date < moment().format("YYYY-MM-DD")) {
-        alert("Datum har varit.");
-        this.setState({ isShown: false });
+      if (result) {
+        this.setState({ bookings: result.data.bookings });
+        this.isTableAvaiable();
       } else {
-        if (result) {
-          this.setState({ bookings: result.data.bookings });
-          this.isTableAvaiable();
-        } else {
-          // If result is empty or error, set empty array instead
-          this.setState({ bookings: [] });
-          // Hide contact div and show a message
-          this.setState({ isShown: false });
-          this.setState({
-            isAvaiable: "Ingen booking eller database connection problem."
-          });
-        }
+        // If result is empty or error, set empty array instead
+        this.setState({ bookings: [] });
+        // // Show contact div
+        this.setState({ isShown: true });
       }
     });
   }
@@ -131,7 +121,6 @@ class Booking extends React.Component<{}, State> {
   isTableAvaiable = () => {
     const object = [];
     for (let i = 0; i < this.state.bookings.length; i++) {
-      console.log(this.state.bookings.length);
       const element = this.state.bookings[i];
 
       if (
@@ -141,12 +130,11 @@ class Booking extends React.Component<{}, State> {
         object.push(element);
       }
     }
-    if (object.length < 3) {
+    if (object.length < 15) {
       // Change isShown state to true to display input field
       this.setState({ isShown: true });
-
-      // alert("tid finns");
     } else {
+      // Hide contact div and show message
       this.setState({ isShown: false });
       this.setState({
         isAvaiable: "Fullbokat, vänligen kolla annan tid eller datum."
@@ -159,11 +147,11 @@ class Booking extends React.Component<{}, State> {
     event.preventDefault();
     const target = event.target;
     const value = target.value;
-    const newName = target.name;
+    const name = target.name;
 
     this.setState(prevState => {
       let booking = Object.assign({}, prevState.booking);
-      booking[newName] = value;
+      booking[name] = value;
       return { booking };
     });
 
@@ -205,63 +193,49 @@ class Booking extends React.Component<{}, State> {
       this.state.data.readData().then((result: any) => {
         if (result) {
           this.setState({ bookings: result.data.bookings });
-
-          // If result is empty or error, set empty array instead
         } else {
+          // If result is empty or error, set empty array instead
           this.setState({ bookings: [] });
         }
 
         const object = [];
 
         for (let i = 0; i < this.state.bookings.length; i++) {
-          console.log(this.state.bookings.length);
           const element = this.state.bookings[i];
-
-          if (
-            element.date === this.state.booking.date &&
-            element.time === this.state.booking.time
-          ) {
+          if (element.date === this.state.booking.date && element.time === this.state.booking.time) {
             object.push(element);
           }
         }
+
         if (object.length < 15 && this.state.gdpr === true) {
           this.state.data.createData(create_booking).then((result: any) => {
-            console.log(result);
+
             this.setState({ bookingId: result.data.message });
-            console.log(this.state.bookingId);
+
             this.setState({ showConfirmation: true });
 
-            // window.alert("Tack! Ditt bookings id är " + this.state.bookingId);
-
-            //Send a notification email of the new booking
-            axios
-              .post(
-                "http://localhost:3001/send",
-                {
-                  name: this.state.booking.name,
-                  email: this.state.booking.email,
-                  date: this.state.booking.date,
-                  time: this.state.booking.time,
-                  bookingId: this.state.bookingId,
-                  subject: "Orderbekräftelse ARKK",
-                  openingMessage: "Tack för din bokning!",
-                  closingMessage: "Varmt Välkommen!"
-                }
-                // { headers: { Accept: "application/json" } }
-              )
-              .then(function(response) {
-                console.log(response);
-              })
-              .catch(function(error) {
-                console.log(error);
-              });
+            this.sendConfirmationMail();
           });
-          console.log(this.state.data);
-        } else {
-          console.log("error");
         }
       });
     }
+  }
+
+  sendConfirmationMail() {
+    //Send a notification email of the new booking
+    const confirmation = {
+      name: this.state.booking.name,
+      email: this.state.booking.email,
+      date: this.state.booking.date,
+      time: this.state.booking.time,
+      bookingId: this.state.bookingId,
+      subject: "Orderbekräftelse ARKK",
+      openingMessage: "Tack för din bokning!",
+      closingMessage: "Varmt Välkommen!"
+    }
+
+    const nodemailer = new NodeMailer();
+    nodemailer.sendMail(confirmation);
   }
 
   // Form validation
@@ -300,7 +274,6 @@ class Booking extends React.Component<{}, State> {
       });
       return false;
     }
-
     return true;
   };
 
