@@ -81,7 +81,7 @@
                     color: $hoverColor;
                 }
             }
-
+            
             hr {
                 margin-top: 10px;
             }
@@ -97,7 +97,10 @@
 }
 
 @include tablet {
+    
+}
 
+@include desktop {
     .footer {
 
         .info {
@@ -106,7 +109,7 @@
             grid-template-rows: 1fr 1fr;
             grid-template-areas: "box1 box2 box3 box4"
                 "box5 box5 box5 box5";
-            padding: 30px 0;
+            padding: 20px 0;
             justify-content: space-between;
 
             .box1 {
@@ -136,5 +139,3 @@
         }
     }
 }
-
-@include desktop {}

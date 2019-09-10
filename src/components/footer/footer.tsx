@@ -22,7 +22,7 @@ export default class Footer extends Component {
         <div className="box3">
           <h2>KONTAKT</h2>
           <address>08-121 421 60</address>
-          <address><a href="info@malina.se">eat@restaurangarkk.se</a></address>
+          <address><a href="eat@restaurangarkk.se">eat@restaurangarkk.se</a></address>
           <hr />
         </div>
         <div className="box4">

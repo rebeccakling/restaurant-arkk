@@ -23,6 +23,7 @@ class Confirmation extends Component <IConfirmationProps, IConfirmationState> {
         date: moment().format("YYYY-MM-DD"),
         time: "0",
         name: "",
+        email: "",
       },
       bookings : [],
     };
@@ -64,9 +65,16 @@ class Confirmation extends Component <IConfirmationProps, IConfirmationState> {
           <div className="hero-img"></div>
           <Navbar />
           <div className="container">
-            <h1>Tack {this.state.booking.name} din bokning är nu genomförd!</h1>
-            <p>Ni har bokat bord för {this.state.booking.number_of_guests} personer och är välkommna till oss den {this.state.booking.date} kl: {this.state.booking.time}</p>
-            <h2>Vid avbokning eller ändring av bokning vänligen kontakta oss och ange ditt bokningsnr: {this.state.bookingId}</h2>
+          <div className="info-confirm">
+            <h1>Tack {this.state.booking.name} för din bokning.</h1>
+
+            <p>Det har nu skickats en orderbekräftelse till <strong>{this.state.booking.email}</strong></p>
+            <p>Ert bokningsnummer: {this.state.bookingId}</p>
+            <p>Ni har bokat bord för {this.state.booking.number_of_guests} pers.</p>
+            <p>Varm välkoman till oss {this.state.booking.date} kl: {this.state.booking.time}.</p>
+           
+            <h3>Vid avbokning eller ändring av bokningen vänligen kontakta oss på mail <a href="eat@restaurangarkk.se">eat@restaurangarkk.se</a> eller på telefon 08-121 421 60</h3>
+            </div>
           </div>
         </main>
         <Footer />
