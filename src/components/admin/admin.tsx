@@ -2,17 +2,15 @@ import React, { Component } from "react";
 import "./admin.scss";
 import { Link } from "react-router-dom";
 import Data from "../../service/data";
-import IBooking from "../../interfaces/ibooking";
 import {
   FaTrash,
   FaChevronCircleUp,
   FaChevronCircleDown
 } from "react-icons/fa";
 import axios from "axios";
+import { IAdminState } from "../../interfaces/iadmin";
+import { IBooking } from "../../interfaces/ibooking";
 
-interface IAdminState {
-  bookings: IBooking[];
-}
 class Admin extends Component<{}, IAdminState> {
   constructor(props: any) {
     super(props);
