@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { FaBars } from "react-icons/fa";
 import "./navbar.scss";
 import { NavLink } from "react-router-dom";
+import { INavbar } from "../../interfaces/inavbar";
 
-interface IState {
-  isOpen: boolean;
-}
-class Navbar extends Component<{}, IState> {
+class Navbar extends Component<{}, INavbar> {
   constructor(props: any) {
     super(props);
 

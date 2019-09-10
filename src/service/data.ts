@@ -1,4 +1,5 @@
-import IBooking from "../interfaces/ibooking";
+import { IBooking } from "../interfaces/ibooking";
+
 const axios = require("axios");
 
 class Data {

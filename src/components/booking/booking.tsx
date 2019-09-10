@@ -10,24 +10,9 @@ import { throwStatement } from "@babel/types";
 import Confirmation from "../confirmation/confirmation";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+import {IBookingState} from "./../../interfaces/ibooking"
 
-interface State {
-  data: Data;
-  date: Date;
-  gdpr: boolean;
-  booking: any;
-  bookings: any;
-  nameError: string;
-  emailError: string;
-  phone_numberError: string;
-  isShown: boolean;
-  isDisable: boolean;
-  bookingId: any;
-  isAvaiable: string;
-  showConfirmation: boolean;
-}
-
-class Booking extends React.Component<{}, State> {
+class Booking extends React.Component<{}, IBookingState> {
   constructor(props: any) {
     super(props);
 
@@ -354,6 +339,7 @@ class Booking extends React.Component<{}, State> {
                 <Calendar
                   onChange={this.handleDateChange}
                   value={this.state.date}
+                  minDate={new Date()}
                 />
                 <p className="error-message">{this.state.isAvaiable}</p>
               </div>
