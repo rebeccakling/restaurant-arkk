@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FaBars } from "react-icons/fa";
 import "./navbar.scss";
+import { NavLink } from "react-router-dom";
 
 interface IState {
   isOpen: boolean;
@@ -34,16 +35,18 @@ class Navbar extends Component<{}, IState> {
           <FaBars className="react-icon" onClick={this.toggleNavbar} />
           <ul className={`navbar ${navbarDisplay}`}>
             <li>
-              <a href="/">HOME</a>
+              <NavLink to="/" exact>
+                HOME
+              </NavLink>
             </li>
             <li>
-              <a href="/booking">BOKA BORD</a>
+              <NavLink to="/booking">BOKA BORD</NavLink>
             </li>
             <li>
-              <a href="/about">OM OSS</a>
+              <NavLink to="/about">OM OSS</NavLink>
             </li>
             <li>
-              <a href="/admin">KONTAKT</a>
+              <NavLink to="/admin">KONTAKT</NavLink>
             </li>
           </ul>
         </nav>
