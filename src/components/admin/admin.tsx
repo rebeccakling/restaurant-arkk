@@ -124,20 +124,20 @@ class Admin extends Component<{}, IAdminState> {
         .catch(function(error) {
           console.log(error);
         });
+
+      // Create parameter for delete method
+      // Instantiate for api connection
+      let delete_booking = {
+        booking_id: booking_id
+      };
+
+      let data = new Data();
+      // Run delete method
+      data.deleteData(delete_booking).then(() => {
+        // Read updated database
+        this.getBooking();
+      });
     }
-
-    // Create parameter for delete method
-    // Instantiate for api connection
-    let delete_booking = {
-      booking_id: booking_id
-    };
-
-    let data = new Data();
-    // Run delete method
-    data.deleteData(delete_booking).then(() => {
-      // Read updated database
-      this.getBooking();
-    });
   };
 
   render() {
@@ -146,7 +146,7 @@ class Admin extends Component<{}, IAdminState> {
       <main className="admin">
         <div className="container">
           <div className="title-container">
-            <h1>Booking Lista/Admin</h1>
+            <h1>Bokningslista</h1>
           </div>
 
           <div className="booking-list-container">
@@ -161,7 +161,7 @@ class Admin extends Component<{}, IAdminState> {
                       <th>Datum</th>
                       <th>Tid</th>
                       <th>Namn</th>
-                      <th>E-post</th>
+                      <th>E-postaddress</th>
                       <th>Antal</th>
                       <th>Ta bort</th>
                     </tr>
