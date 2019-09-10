@@ -27,10 +27,6 @@ interface State {
   showConfirmation: boolean;
 }
 
-// interface IProps {
-//   bookingId: any;
-// }
-
 class Booking extends React.Component<{}, State> {
   constructor(props: any) {
     super(props);
@@ -423,7 +419,7 @@ class Booking extends React.Component<{}, State> {
                     </label>
                     <br />
                     <button
-                      onChange={this.completeBooking}
+                      onClick={this.completeBooking}
                       disabled={
                         this.state.isDisable ||
                         !this.state.booking.name.length ||
