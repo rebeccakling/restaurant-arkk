@@ -1,6 +1,6 @@
 @import "../../sass/style.scss";
 
-.confirmation { 
+.confirmation {
 
     .hero-img {
         background-image: url(../../assets/images/hero-confirmation.jpg);
@@ -16,74 +16,74 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-    
-        .info-confirm {
-    
-        p {
-            font-family: $fontBody;
-            font-size: $fontBodySize;
-            margin: 2rem 1rem;
-            text-align: center;
-            margin: 10px 0;
-           
-        }
 
+        .info-confirm {
+
+            p {
+                font-family: $fontBody;
+                font-size: $fontBodySize;
+                margin: 2rem 1rem;
+                text-align: center;
+                margin: 10px 0;
+
+            }
+
+
+            h3 {
+                font-family: $fontBody;
+                font-size: $fontBodySize;
+                margin: 2rem 2rem;
+                text-align: center;
+                padding-bottom: 2rem;
+
+                p {
+                    font-size: $fontBodySize;
+
+                }
+
+                a {
+                    &:hover {
+                        color: $hoverColor;
+                    }
+                }
+
+            }
+        }
+    }
+
+
+    @include tablet {
+        .confirmation {
+            .container {
+                p {
+                    font-size: $fontBodySizeTablet;
+                }
+
+                h3 {
+                    padding: 0.2rem;
+                }
+            }
+        }
+    }
+
+    @include desktop {
+
+        .hero-img {
+
+            background-position: bottom;
+
+        }
 
         h3 {
-            font-family: $fontBody;
-            font-size: $fontBodySize;
-            margin: 2rem 2rem;
-            text-align: center;
-            padding-bottom: 2rem;
-
-        p{
-            font-size: $fontBodySize;
-
+            padding: 0 100px;
         }
-
-        a {
-            &:hover {
-                color: $hoverColor;
-            } 
-        } 
-
-        } 
     }
-}
 
+    .container {
 
-@include tablet{
-    .confirmation{
-        .container{
-            p{
-                font-size: $fontBodySizeTablet;
-            }
+        p {
+
+            font-size: $fontBodySizeDesktop;
         }
     }
 }
-
-@include desktop{
-
-
-    h3 {
-        padding: 0.2rem;
-    }   
-}
-
-@include desktop {
-
-    h3 {
-        padding: 0 100px;
-     }
-}
-
-        .container{
-    
-            p{
-                
-                font-size: $fontBodySizeDesktop;
-            }
-        }
-    }
-}
-
