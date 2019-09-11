@@ -7,7 +7,7 @@
 }
 
 @mixin buttonStyle ($bgColor, $fColor) {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 8rem;
     background: $bgColor;
     color: $fColor !important;
     display: inline-block;
