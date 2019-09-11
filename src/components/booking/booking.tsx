@@ -78,7 +78,6 @@ class Booking extends React.Component<{}, IBookingState> {
     this.setState({
       isAvaiable: ""
     });
-    // Check if chosen date is later than today
     this.state.data.readData().then((result: any) => {
       if (result) {
         this.setState({ bookings: result.data.bookings });
@@ -173,10 +172,7 @@ class Booking extends React.Component<{}, IBookingState> {
 
         for (let i = 0; i < this.state.bookings.length; i++) {
           const element = this.state.bookings[i];
-          if (
-            element.date === this.state.booking.date &&
-            element.time === this.state.booking.time
-          ) {
+          if (element.date === this.state.booking.date && element.time === this.state.booking.time) {
             object.push(element);
           }
         }
