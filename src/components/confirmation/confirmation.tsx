@@ -3,10 +3,7 @@ import "./confirmation.scss";
 import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
 import Data from "../../service/data";
-import {
-  IConfirmationProps,
-  IConfirmationState
-} from "./../../interfaces/iconfirmation";
+import {IConfirmationProps,IConfirmationState} from "./../../interfaces/iconfirmation";
 import { IBooking } from "../../interfaces/ibooking";
 import { Redirect } from "react-router-dom";
 
@@ -67,7 +64,7 @@ class Confirmation extends Component<IConfirmationProps, IConfirmationState> {
     return (
       <>
         <main className="confirmation">
-          <div className="hero-img"></div>
+          <div className="hero-image"></div>
           <Navbar />
           <div className="container">
             <div className="info-confirm">
