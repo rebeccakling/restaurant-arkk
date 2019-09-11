@@ -7,8 +7,7 @@ import Footer from "../footer/footer";
 import Navbar from "../navbar/navbar";
 import { Redirect } from "react-router-dom";
 import NodeMailer from "../../service/data-nodemailer";
-import {IBookingState} from "./../../interfaces/ibooking"
-
+import { IBookingState } from "./../../interfaces/ibooking";
 
 class Booking extends React.Component<{}, IBookingState> {
   constructor(props: any) {
@@ -183,20 +182,27 @@ class Booking extends React.Component<{}, IBookingState> {
 
         for (let i = 0; i < this.state.bookings.length; i++) {
           const element = this.state.bookings[i];
-          if (element.date === this.state.booking.date && element.time === this.state.booking.time) {
+          if (
+            element.date === this.state.booking.date &&
+            element.time === this.state.booking.time
+          ) {
             object.push(element);
           }
         }
 
         if (object.length < 15 && this.state.gdpr === true) {
-          this.state.data.createData(create_booking).then((result: any) => {
+          this.state.data
+            .createData(create_booking)
+            .then((result: any) => {
+              this.setState({ bookingId: result.data.message });
 
-            this.setState({ bookingId: result.data.message });
+              this.setState({ showConfirmation: true });
 
-            this.setState({ showConfirmation: true });
-
-            this.sendConfirmationMail();
-          });
+              this.sendConfirmationMail();
+            })
+            .catch((error: any) => {
+              alert("Vänligen kontakta restaurang\nError:" + error);
+            });
         }
       });
     }
@@ -213,7 +219,7 @@ class Booking extends React.Component<{}, IBookingState> {
       subject: "Orderbekräftelse ARKK",
       openingMessage: "Tack för din bokning!",
       closingMessage: "Varmt Välkommen!"
-    }
+    };
 
     const nodemailer = new NodeMailer();
     nodemailer.sendMail(confirmation);

@@ -80,18 +80,18 @@ class Confirmation extends Component<IConfirmationProps, IConfirmationState> {
                 pers.
               </p>
               <p>
-                Varm välkoman till oss {this.state.booking.date} kl:{" "}
+                Varmt välkomna till oss {this.state.booking.date} kl:{" "}
                 {this.state.booking.time}.
               </p>
 
-              <h3>
+              <div className="info">
                 Vid avbokning eller ändring av bokningen vänligen kontakta oss
                 på mail{" "}
                 <a href="mailto: eat@restaurangarkk.se">
                   eat@restaurangarkk.se
                 </a>{" "}
                 eller på telefon 08-121 421 60
-              </h3>
+              </div>
             </div>
           </div>
         </main>

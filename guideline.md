@@ -9,6 +9,7 @@
 ​
 
 - Use hyphen-case (-) for css-classnames
+- camelCase for variables
 - Never style with ID
   ​
 

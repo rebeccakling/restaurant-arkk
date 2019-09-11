@@ -346,7 +346,7 @@ body {
    background-color: $backgroundColor;
    font-family: $fontBody;
    font-size: $fontBodySize;
-   color: $primaryColorSub;
+   color: $fontColorMain;
 }
 
 * {
@@ -371,6 +371,12 @@ a> :active {
    text-decoration: none;
 }
 
+a {
+   &:hover {
+      color: $hoverColor;
+   }
+}
+
 .container {
    width: $containerWidth;
    margin: auto;
@@ -378,11 +384,13 @@ a> :active {
 }
 
 h1 {
-   color: $primaryColor;
+   color: $fontHeadingTitleColor;
    font-family: $fontHeadingTitle;
    font-size: 25px;
    text-align: center;
-   margin-top: 2.5em;
+   // margin-top: 2.5em;
+   margin-top: $spacingForParagraph;
+   margin-bottom: $spacingForParagraph;
    text-transform: uppercase;
 }
 
@@ -400,4 +408,9 @@ input:-webkit-autofill:active {
 
 ::placeholder {
    font-size: 1rem;
+}
+
+p {
+   line-height: 30px;
+   text-align: center;
 }
