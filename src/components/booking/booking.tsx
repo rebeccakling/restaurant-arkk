@@ -5,11 +5,7 @@ import moment from "moment";
 import Data from "../../service/data";
 import Footer from "../footer/footer";
 import Navbar from "../navbar/navbar";
-import { FaThemeisle } from "react-icons/fa";
-import { throwStatement } from "@babel/types";
-import Confirmation from "../confirmation/confirmation";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
 import NodeMailer from "../../service/data-nodemailer";
 import {IBookingState} from "./../../interfaces/ibooking"
 
@@ -33,7 +29,7 @@ class Booking extends React.Component<{}, IBookingState> {
       bookings: [],
       nameError: "",
       emailError: "",
-      phone_numberError: "",
+      phoneNumberError: "",
       isShown: false,
       isDisable: true,
       bookingId: "0",
@@ -43,7 +39,6 @@ class Booking extends React.Component<{}, IBookingState> {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.completeBooking = this.completeBooking.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
     this.setDate = this.setDate.bind(this);
     this.validateDate = this.validateDate.bind(this);
     this.sendConfirmationMail = this.sendConfirmationMail.bind(this);
@@ -163,7 +158,7 @@ class Booking extends React.Component<{}, IBookingState> {
       this.setState({
         nameError: "",
         emailError: "",
-        phone_numberError: "",
+        phoneNumberError: "",
         isDisable: false
       });
 
@@ -256,7 +251,7 @@ class Booking extends React.Component<{}, IBookingState> {
       this.setState({
         nameError: nameErrorToUpdate,
         emailError: emailErrorToUpdate,
-        phone_numberError: phone_numberErrorToUpdate
+        phoneNumberError: phone_numberErrorToUpdate
       });
       return false;
     }
@@ -273,7 +268,7 @@ class Booking extends React.Component<{}, IBookingState> {
     return (
       <>
         <main className="booking">
-          <div className="heroImageBooking"></div>
+          <div className="hero-image-booking"></div>
           <Navbar />
           <div className="wrapper">
             <h1>Boka bord här</h1>
@@ -356,7 +351,7 @@ class Booking extends React.Component<{}, IBookingState> {
                       MOBILTELEFON:
                       <br />
                       <span className="error-message">
-                        {this.state.phone_numberError}
+                        {this.state.phoneNumberError}
                       </span>
                       <input
                         type="text"
@@ -370,7 +365,7 @@ class Booking extends React.Component<{}, IBookingState> {
                     <label>
                       GDPR: <br />
                       <input
-                        className="gdprCheckbox"
+                        className="gdpr-checkbox"
                         name="gdpr"
                         type="checkbox"
                         checked={this.state.booking.gdpr}
