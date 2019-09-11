@@ -2,7 +2,7 @@
 
 .about {
 
-    .heroImageAbout {
+    .hero-image {
         background-image: url(../../assets/images/heroimage-about.jpg);
         background-position: center;
         background-repeat: no-repeat;
@@ -18,22 +18,21 @@
         background-size: cover;
         display: grid;
 
-        .aboutUsInfo {
-            .aboutArkk {
+        .about-info {
+            .about-arkk {
 
                 p {
                     font-family: $fontBody;
                     font-size: $fontBodySize;
                     margin: 2rem 1rem;
                     text-align: center;
-                    
                 }
             }
 
-            .imageMarkChef {
+            .image-chef {
                 display: grid;
 
-                img{
+                img {
                     background-position: center;
                     background-repeat: no-repeat;
                     background-size: cover;
@@ -45,7 +44,7 @@
                 }
             }
 
-            .infoMark {
+            .info-chef {
                 padding: 1rem 1rem;
 
                 p {
@@ -67,31 +66,27 @@
         .container {
             margin-bottom: 5rem;
 
-            .heroImageAbout {
+            .hero-image {
                 min-height: 500px;
                 max-height: 500px;
             }
 
-            .aboutUsInfo {
+            .about-info {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 grid-template-areas: "aboutArkk aboutArkk"
                     "imageMarkChef infoMark";
 
-                .aboutArkk {
+                .about-arkk {
                     grid-area: aboutArkk;
-
-                    p{
-                        font-size: $fontBodySizeTablet;
-                    }
                 }
 
-                .imageMarkChef {
+                .image-chef {
                     grid-area: imageMarkChef;
                     width: 350px;
                     justify-self: right;
 
-                    img{
+                    img {
                         width: 350px;
                     }
                 }
@@ -109,18 +104,4 @@
         }
     }
 
-}
-
-@include desktop {
-    .about{
-        .container{
-            .aboutUsInfo{
-                .aboutArkk{
-                    p{
-                        font-size: $fontBodySizeDesktop;
-                    }
-                }
-            }
-        }
-    }
 }
