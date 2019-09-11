@@ -82,6 +82,8 @@
 
                 button {
                     @include buttonStyle($buttonBookting, $fontSubColor);
+                    width: 100%;
+                    margin: 0!important;
 
                     &:hover {
                         @include buttonStyle($buttonBookingHover, $fontSubColor);

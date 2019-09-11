@@ -53,6 +53,7 @@ export default class Home extends Component {
                 </p>
                 <p>
                   <strong>1450 kr/person</strong>
+                  <hr/>
                 </p>
               </div>
             </div>
