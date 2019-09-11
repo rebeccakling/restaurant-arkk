@@ -1,3 +1,3 @@
 export interface INavbar {
-    isOpen: boolean;
+    isClosed: boolean;
   }

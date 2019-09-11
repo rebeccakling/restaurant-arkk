@@ -9,22 +9,16 @@ class Navbar extends Component<{}, INavbar> {
     super(props);
 
     this.state = {
-      isOpen: true
+      isClosed: true
     };
   }
 
   toggleNavbar = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-  };
-
-  closeNavbar = () => {
-    if (this.state.isOpen === true) {
-      this.toggleNavbar();
-    }
+    this.setState({ isClosed: !this.state.isClosed });
   };
 
   render() {
-    const display = this.state.isOpen;
+    const display = this.state.isClosed;
     const navbarDisplay = display ? `hide` : `show`;
 
     return (
