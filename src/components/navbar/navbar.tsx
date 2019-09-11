@@ -33,9 +33,7 @@ class Navbar extends Component<{}, INavbar> {
           <FaBars className="react-icon" onClick={this.toggleNavbar} />
           <ul className={`navbar ${navbarDisplay}`}>
             <li>
-              <NavLink to="/" exact>
-                HOME
-              </NavLink>
+              <NavLink to="/" exact>HOME</NavLink>
             </li>
             <li>
               <NavLink to="/booking">BOKA BORD</NavLink>
