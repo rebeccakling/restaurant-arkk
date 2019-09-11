@@ -35,12 +35,6 @@ class Booking extends React.Component<{}, IBookingState> {
       isAvaiable: "",
       showConfirmation: false
     };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.completeBooking = this.completeBooking.bind(this);
-    this.setDate = this.setDate.bind(this);
-    this.validateDate = this.validateDate.bind(this);
-    this.sendConfirmationMail = this.sendConfirmationMail.bind(this);
   }
 
   handleDateChange = (date: any) => {
@@ -71,15 +65,15 @@ class Booking extends React.Component<{}, IBookingState> {
     );
   };
 
-  setDate(date: any) {
+  setDate = (date: any) => {
     this.setState(prevState => {
       let booking = Object.assign({}, prevState.booking);
       booking.date = moment(date).format("YYYY-MM-DD");
       return { booking };
     });
-  }
+  };
 
-  validateDate() {
+  validateDate = () => {
     // Clear message
     this.setState({
       isAvaiable: ""
@@ -96,7 +90,7 @@ class Booking extends React.Component<{}, IBookingState> {
         this.setState({ isShown: true });
       }
     });
-  }
+  };
 
   isTableAvaiable = () => {
     const object = [];
@@ -120,7 +114,7 @@ class Booking extends React.Component<{}, IBookingState> {
     }
   };
 
-  handleInputChange(event: any) {
+  handleInputChange = (event: any) => {
     event.preventDefault();
     const target = event.target;
     const value = target.value;
@@ -133,7 +127,7 @@ class Booking extends React.Component<{}, IBookingState> {
     });
 
     this.setDate(this.state.date);
-  }
+  };
 
   handleGdprChange = (event: any) => {
     // Toggle button
@@ -144,7 +138,7 @@ class Booking extends React.Component<{}, IBookingState> {
     this.setState({ gdpr: value });
   };
 
-  completeBooking(event: any) {
+  completeBooking = (event: any) => {
     event.preventDefault();
 
     const isValid = this.validate();
@@ -198,14 +192,14 @@ class Booking extends React.Component<{}, IBookingState> {
               this.sendConfirmationMail();
             })
             .catch((error: any) => {
-              alert("Vänligen kontakta restaurang\nError:" + error);
+              alert("Det gick inte att boka just nu, vänligen kontakta oss.\nError:" + error);
             });
         }
       });
     }
-  }
+  };
 
-  sendConfirmationMail() {
+  sendConfirmationMail = () => {
     //Send a notification email of the new booking
     const confirmation = {
       name: this.state.booking.name,
@@ -220,7 +214,7 @@ class Booking extends React.Component<{}, IBookingState> {
 
     const nodemailer = new NodeMailer();
     nodemailer.sendMail(confirmation);
-  }
+  };
 
   // Form validation
   validate = () => {
