@@ -103,10 +103,7 @@ class Booking extends React.Component<{}, IBookingState> {
     for (let i = 0; i < this.state.bookings.length; i++) {
       const element = this.state.bookings[i];
 
-      if (
-        element.date === this.state.booking.date &&
-        element.time === this.state.booking.time
-      ) {
+      if (element.date === this.state.booking.date && element.time === this.state.booking.time) {
         object.push(element);
       }
     }
