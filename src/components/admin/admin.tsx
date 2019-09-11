@@ -3,9 +3,9 @@ import "./admin.scss";
 import { Link } from "react-router-dom";
 import Data from "../../service/data";
 import { FaTrash,FaChevronCircleUp,FaChevronCircleDown } from "react-icons/fa";
-import axios from "axios";
 import { IAdminState } from "../../interfaces/iadmin";
 import { IBooking } from "../../interfaces/ibooking";
+import NodeMailer from "../../service/data-nodemailer";
 
 class Admin extends Component<{}, IAdminState> {
   constructor(props: any) {
@@ -90,36 +90,16 @@ class Admin extends Component<{}, IAdminState> {
   // Remove a booking from database
   removeBooking = (booking_id: number) => {
     // Confirm if a user wants to delete
-    let okToRemove = window.confirm("Are you sure?");
+    let okToRemove = window.confirm("Är du säker att du vill ta bort bokningen?");
 
     if (okToRemove) {
       //Find the details of a selected booking and send a notification email of cancellation
       let bookingToDelete: any = this.state.bookings.find(
         booking => booking.booking_id === booking_id
       );
-      axios
-        .post(
-          "http://localhost:3001/send",
-          {
-            name: bookingToDelete.name,
-            email: bookingToDelete.email,
-            date: bookingToDelete.date,
-            time: bookingToDelete.time,
-            bookingId: bookingToDelete.booking_id,
-            subject: "Din bokning är nu avbokad.",
-            openingMessage: "Vi har avbokat denna bokning.",
-            closingMessage: "Tack!"
-          }
-        )
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+      
+      this.sendConfirmationMail( bookingToDelete.name, bookingToDelete.email, bookingToDelete.date, bookingToDelete.time, booking_id);
 
-      /* Create parameter for delete method
-         Instantiate for api connection */
       let deleteBooking = {
         booking_id: booking_id
       };
@@ -132,6 +112,24 @@ class Admin extends Component<{}, IAdminState> {
       });
     }
   };
+
+   //Send a notification email of cancellation
+   sendConfirmationMail( name: string, email: string, date: string, time: string, bookingId: number) {
+    const confirmation = {
+      name: name,
+      email: email,
+      date: date,
+      time: time,
+      bookingId: bookingId,
+      subject: "Din bokning är nu avbokad.",
+      openingMessage: "Denna bokning är nu avbokad.",
+      closingMessage: "Hoppas vi ses snart igen!"
+    };
+
+    const nodemailer = new NodeMailer(); 
+    nodemailer.sendMail(confirmation);
+
+  }
 
   render() {
     const hasBooking = this.state.bookings.length;
