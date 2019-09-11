@@ -21,13 +21,19 @@
         .container {
 
             margin: 30px 0;
-            max-width: 500px;
+            max-width: 365px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-areas: "guests time"
                 "calendar calendar"
                 "contacts contacts";
             justify-items: center;
+
+            select{
+                width: 10em;
+                height: 2em;
+                
+            }
 
             .guests {
                 grid-area: guests;
@@ -69,6 +75,7 @@
                 label {
                     font-size: 1rem;
                 }
+                
 
                 button {
                     @include buttonStyle($buttonBookting, $fontSubColor);

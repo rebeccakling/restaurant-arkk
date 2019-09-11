@@ -279,8 +279,9 @@ class Booking extends React.Component<{}, IBookingState> {
           <div className="wrapper">
             <h1>Boka bord här</h1>
             <div className="container">
-              <div className="guests">
+
                 <select
+                  className="guests"
                   name="number_of_guests"
                   value={this.state.booking.number_of_guests}
                   onChange={this.handleInputChange}
@@ -295,9 +296,10 @@ class Booking extends React.Component<{}, IBookingState> {
                   <option value="5">5 gäster</option>
                   <option value="6">6 gäster</option>
                 </select>
-              </div>
-              <div className="time">
+
+
                 <select
+                className="time"
                   name="time"
                   value={this.state.booking.time}
                   onChange={this.handleTimeChange}
@@ -308,7 +310,7 @@ class Booking extends React.Component<{}, IBookingState> {
                   <option value="18:00:00">18:00</option>
                   <option value="21:00:00">21:00</option>
                 </select>
-              </div>
+
               <div className="calendar">
                 <h3>DATUM</h3>
                 <Calendar
