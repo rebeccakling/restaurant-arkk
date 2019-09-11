@@ -22,7 +22,7 @@
 - PascalCase for classes
 - No abbreviations, use meaningful and explanatory names (whole words, sentences)
 - Functions should do one thing.
-- Max 2 parameters per function
+- Max 5 parameters per function
   ​
 
 ## Files and folders
