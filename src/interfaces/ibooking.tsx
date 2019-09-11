@@ -18,7 +18,7 @@ export interface IBookingState {
     bookings: any;
     nameError: string;
     emailError: string;
-    phone_numberError: string;
+    phoneNumberError: string;
     isShown: boolean;
     isDisable: boolean;
     bookingId: any;

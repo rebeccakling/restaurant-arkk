@@ -1,22 +1,9 @@
 import React from "react";
-// import ReactDOM from "react-dom";
-import Enzyme, { mount, shallow } from "enzyme";
+import Enzyme, { shallow } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import Booking from "./booking";
-import State from "./booking";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
-
-const mockDatabase = [
-  {
-    number_of_guests: 1,
-    date: "2019-08-13",
-    time: "21:00:00",
-    name: "test",
-    email: "jafha@gmail.com",
-    phone_number: "0723423340"
-  }
-];
 
 it("should render without error", () => {
   const wrapper = shallow(<Booking />);
@@ -48,5 +35,3 @@ it("should change Gdpr state", () => {
   //Check if state changed 
   expect(wrapper.state("gdpr")).toBe(true);
 });
-
-
