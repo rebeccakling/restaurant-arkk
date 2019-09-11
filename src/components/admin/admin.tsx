@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import "./admin.scss";
 import { Link } from "react-router-dom";
 import Data from "../../service/data";
-import {
-  FaTrash,
-  FaChevronCircleUp,
-  FaChevronCircleDown
-} from "react-icons/fa";
+import { FaTrash,FaChevronCircleUp,FaChevronCircleDown } from "react-icons/fa";
 import axios from "axios";
 import { IAdminState } from "../../interfaces/iadmin";
 import { IBooking } from "../../interfaces/ibooking";
@@ -41,8 +37,8 @@ class Admin extends Component<{}, IAdminState> {
 
   // Decrement state of number_of_guests in database
   decrement = (id: number) => {
-    let tempBookings: IBooking[] = [...this.state.bookings];
-    let bookingToUpdate = tempBookings.find(
+    let temporaryBookings: IBooking[] = [...this.state.bookings];
+    let bookingToUpdate = temporaryBookings.find(
       booking => booking.booking_id === id
     );
 
@@ -52,14 +48,14 @@ class Admin extends Component<{}, IAdminState> {
     }
 
     this.setState({
-      bookings: [...tempBookings]
+      bookings: [...temporaryBookings]
     });
   };
 
   // Increment state of number_of_guests
   increment = (id: number) => {
-    let tempBookings: IBooking[] = [...this.state.bookings];
-    let bookingToUpdate = tempBookings.find(
+    let temporaryBookings: IBooking[] = [...this.state.bookings];
+    let bookingToUpdate = temporaryBookings.find(
       booking => booking.booking_id === id
     );
 
@@ -72,7 +68,7 @@ class Admin extends Component<{}, IAdminState> {
     }
 
     this.setState({
-      bookings: [...tempBookings]
+      bookings: [...temporaryBookings]
     });
   };
 
@@ -114,7 +110,6 @@ class Admin extends Component<{}, IAdminState> {
             openingMessage: "Vi har avbokat denna bokning.",
             closingMessage: "Tack!"
           }
-          // { headers: { Accept: "application/json" } }
         )
         .then(function(response) {
           console.log(response);
@@ -123,15 +118,15 @@ class Admin extends Component<{}, IAdminState> {
           console.log(error);
         });
 
-      // Create parameter for delete method
-      // Instantiate for api connection
-      let delete_booking = {
+      /* Create parameter for delete method
+         Instantiate for api connection */
+      let deleteBooking = {
         booking_id: booking_id
       };
 
       let data = new Data();
       // Run delete method
-      data.deleteData(delete_booking).then(() => {
+      data.deleteData(deleteBooking).then(() => {
         // Read updated database
         this.getBooking();
       });
