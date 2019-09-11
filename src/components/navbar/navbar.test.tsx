@@ -38,10 +38,4 @@ it("hamburger button toggle true and false", () => {
   button.simulate("click");
   // Check if state changed
   expect(wrapper.state("isOpen")).toBe(false);
-
-  // const ulClassName = wrapper.find(".navbar").hasClass("show");
-  // expect(ulClassName).toEqual(false);
-
-  // //   // find display and test value
-  // expect(ulClassName).toEqual(true);
 });
