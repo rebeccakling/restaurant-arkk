@@ -5,7 +5,7 @@ import "./footer.scss";
 export default class Footer extends Component {
   render() {
     return (
-      <footer className="footer" role="footerInfo">
+      <footer className="footer" role="footer-info">
       <div className="info">
       <div className="box1">
           <h2>ÖPPETTIDER</h2>
