@@ -53,8 +53,28 @@ export default class Home extends Component {
                 </p>
                 <p>
                   <strong>1450 kr/person</strong>
-                  <hr/>
+                  <hr />
                 </p>
+              </div>
+              <div className="gallery-collage">
+                <div className="gallery-three">
+                  <img src={require("./../../assets/images/austin-ban-IS6RwpuEJpY-unsplash.jpg")} />
+                </div>
+                <div className="gallery-four">
+                  <img src={require("./../../assets/images/davide-cantelli-jpkfc5_d-DI-unsplash.jpg")} />
+                </div>
+                <div className="gallery-five">
+                  <img src={require("./../../assets/images/fabrizio-magoni-boaDpmC-_Xo-unsplash.jpg")} />
+                </div>
+                <div className="gallery-six">
+                  <img src={require("./../../assets/images/jay-wennington-N_Y88TWmGwA-unsplash.jpg")} />
+                </div>
+                <div className="gallery-seven">
+                  <img src={require("./../../assets/images/lidye-1Shk_PkNkNw-unsplash.jpg")} />
+                </div>
+                <div className="gallery-eight">
+                  <img src={require("./../../assets/images/pablo-merchan-montes-Orz90t6o0e4-unsplash.jpg")} />
+                </div>
               </div>
             </div>
           </div>
