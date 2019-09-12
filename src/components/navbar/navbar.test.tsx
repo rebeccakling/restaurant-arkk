@@ -1,6 +1,5 @@
 import React from "react";
-// import ReactDOM from "react-dom";
-import Enzyme, { mount, shallow } from "enzyme";
+import Enzyme, { shallow } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import Navbar from "./navbar";
 
@@ -27,8 +26,6 @@ it("toggle state for navbar starts with true", () => {
 
 it("hamburger button toggle true and false", () => {
   const wrapper = setup();
-  //   const wrapper = setup(null, false);
-
   const initialMenuBarOpenState = wrapper.state("isOpen");
 
   // find button and click
