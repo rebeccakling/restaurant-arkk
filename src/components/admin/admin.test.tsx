@@ -74,7 +74,7 @@ it("decrements number_of_guests", () => {
   expect(wrapper.instance().state.bookings[0].number_of_guests).toBe(0);
 });
 
-it("fetches data", () => {
+it("mock async function", () => {
   const response = { bookings: mockDatabase };
 
   jest.fn().mockResolvedValue(() => Promise.resolve(response));
