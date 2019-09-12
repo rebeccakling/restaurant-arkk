@@ -1,6 +1,6 @@
 import React from "react";
 // import ReactDOM from "react-dom";
-import Enzyme, { mount, shallow } from "enzyme";
+import Enzyme, { shallow } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import Admin from "./admin";
 import IAdminState from "./admin";
@@ -54,7 +54,6 @@ it("decrements number_of_guests", () => {
   wrapper.instance().setState({
     bookings: [
       {
-        // Could not use mockdatabase variable as number of guess will be 2 before simulate.. why?
         booking_id: 32,
         number_of_guests: 1,
         date: "2019-08-13",
@@ -76,8 +75,6 @@ it("decrements number_of_guests", () => {
 });
 
 it("fetches data", () => {
-  // const wrapper = shallow<Admin, {}, IAdminState>(<Admin />);
-
   const response = { bookings: mockDatabase };
 
   jest.fn().mockResolvedValue(() => Promise.resolve(response));
