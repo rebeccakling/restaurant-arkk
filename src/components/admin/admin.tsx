@@ -64,7 +64,7 @@ class Admin extends Component<{}, IAdminState> {
       bookingToUpdate!.number_of_guests++;
       // Otherwise show an error message
     } else {
-      window.alert("max of number of guests at one booking is 6.");
+      window.alert("Det kan max vara 6 gäster per bookning.");
     }
 
     this.setState({
@@ -83,7 +83,7 @@ class Admin extends Component<{}, IAdminState> {
     data.updateData(bookingToUpdate).then((result: any) => {
       // Read updated database
       this.getBooking();
-      window.alert("A booking in database has been updated");
+      window.alert("En bokning har uppdaterats i databasen.");
     });
   };
 

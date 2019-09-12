@@ -133,14 +133,20 @@
 
                     .gallery-three{
                         grid-area: gallery-three;
+                        display: flex;
+                        align-items: flex-end;
                     }
 
                     .gallery-four{
                         grid-area: gallery-four;
+                        display: flex;
+                        align-items: flex-end;
                     }
 
                     .gallery-five{
                         grid-area: gallery-five;
+                        display: flex;
+                        align-items: flex-end;
                     }
 
                     .gallery-six{
