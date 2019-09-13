@@ -1,0 +1,95 @@
+@import "../../sass/style";
+
+header {
+    padding: 1rem 0;
+    background: $primaryColorSub;
+    text-align: center;
+    width: 100%;
+}
+
+nav {
+    background: $primaryColorSub;
+    text-align: center;
+    width: $containerWidth;
+    max-width: $maxWidth;
+    margin: auto;
+
+    .react-icon {
+        color: $fontSubColor !important;
+        font-size: 2rem;
+        outline: 1px solid $fontSubColor;
+        padding: $mainSpacing;
+        cursor: pointer;
+    }
+
+    .show {
+        padding: 10px;
+        height: auto;
+        transition: 0.8s;
+    }
+
+    .hide {
+        height: 0;
+        overflow: hidden;
+        transition: 0.3s;
+    }
+
+    li {
+        margin: 1rem 0;
+
+        a {
+            color: $fontSubColor !important;
+            text-transform: uppercase;
+            position: relative;
+            border-bottom: 2px solid $primaryColorSub;
+
+            &:hover {
+                color: $hoverColor !important;
+            }
+        }
+
+        a::after {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            display: block;
+            content: "";
+            width: 100%;
+            height: 2px;
+            background: $hoverColor;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        a:hover::after {
+            transform: scaleX(1);
+        }
+
+
+    }
+
+    .active {
+        color: $hoverColor !important;
+    }
+}
+
+@include tablet {
+
+    nav {
+
+        .react-icon {
+            display: none;
+        }
+
+        .hide {
+            height: auto;
+        }
+
+        ul {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+    }
+
+}

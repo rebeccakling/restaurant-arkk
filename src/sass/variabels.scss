@@ -1,0 +1,41 @@
+// Font family, size
+$fontHeadingTitle: "Hepta Slab";
+$fontBody: "sans-serif";
+$fontBodySize: 1.1rem;
+$fontBodySizeTablet: 1.5rem;
+$fontBodySizeDesktop: 1.6rem;
+$textShadow: -1px -1px black;
+
+// Color
+$backgroundColor: #fff;
+$primaryColor: #c59d40;
+$primaryColorSub: #000;
+$subColor: #C4C4C4;
+
+
+// Font color
+$fontColorMain: #000;
+$fontSubColor: #fff;
+$hoverColor: #c59d40;
+$fontHeadingTitleColor: #c59d40;
+$errorMessage: red;
+
+// Booking page
+$buttonBookting: #0FAADC;
+$buttonBookingHover: lighten($buttonBookting, 40);
+$buttonBookingDisable: #C4C4C4;
+
+//Used for defining grids
+$x3grid: repeat(3, 1fr);
+$x6grid: repeat(6, 1fr);
+$x12grid: repeat(12, 1fr);
+
+// Spacing
+$mainSpacing: 0.3rem;
+$spacingBetweenDiv: 1rem;
+$spacingForParagraph: 3rem;
+$containerWidth: 95%;
+$maxWidth: 980px;
+
+// Radius
+$mainRadius: 0.3rem;

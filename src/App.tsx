@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "./App.scss";
+import Home from "./components/home/home";
+import Admin from "./components/admin/admin";
+import About from "./components/about/about";
+import Booking from "./components/booking/booking";
+import Confirmation from "./components/confirmation/confirmation";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component<{}, {}> {
+  constructor(props: any) {
+    super(props);
+  }
+
+  public render() {
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/admin" component={Admin} />
+          <Route exact path="/booking" component={Booking} />
+          <Route exact path="/confirmation" component={Confirmation} />
+          <Route component={Home} />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

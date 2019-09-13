@@ -1,0 +1,106 @@
+@import "../../sass/style.scss";
+
+.about {
+
+    .hero-image {
+        background-image: url(../../assets/images/heroimage-about.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 400px;
+        max-height: 400px;
+    }
+
+    .container {
+        background-image: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 50%), linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 50%), url(../../assets/images/info_background.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: grid;
+
+        .about-info {
+            .about-arkk {
+
+                p {
+                    font-family: $fontBody;
+                    font-size: $fontBodySize;
+                    margin: 2rem 1rem;
+                    text-align: center;
+                }
+            }
+
+            .image-chef {
+                display: grid;
+
+                img {
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    object-fit: cover;
+                    object-position: top;
+                    justify-self: center;
+                    height: 400px;
+                    max-width: 300px;
+                }
+            }
+
+            .info-chef {
+                padding: 1rem 1rem;
+
+                p {
+                    border-bottom: 1px solid gray;
+                    margin: 2rem 1rem;
+                    text-align: left;
+                    padding-bottom: 1rem;
+                }
+            }
+        }
+    }
+}
+
+
+@include tablet {
+
+    .about {
+
+        .container {
+            margin-bottom: 5rem;
+
+            .hero-image {
+                min-height: 500px;
+                max-height: 500px;
+            }
+
+            .about-info {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: "aboutArkk aboutArkk"
+                    "imageMarkChef infoMark";
+
+                .about-arkk {
+                    grid-area: aboutArkk;
+                }
+
+                .image-chef {
+                    grid-area: imageMarkChef;
+                    width: 350px;
+                    justify-self: right;
+
+                    img {
+                        width: 350px;
+                    }
+                }
+
+                .infoMark {
+                    grid-area: infoMark;
+                    justify-content: center;
+
+                    p {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+
+}
